@@ -6,6 +6,6 @@ Redmine::Plugin.register :chili_pdf do
   author 'Tom Kersten'
   description "Implements/Enhances PDF-export functionality using the Webkit rendering engine (via the 'wkhtmltopdf' executable)."
   version ChiliPDF::VERSION
-  url 'http://example.com/path/to/plugin'
+  url 'https://github.com/tomkersten/chili_pdf'
   author_url 'http://tomkersten.com/'
 end
