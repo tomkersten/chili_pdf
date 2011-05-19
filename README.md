@@ -1,5 +1,15 @@
 # ChiliPDF Plugin - Flexible PDF exporting for ChiliProject/Redmine
 
+## Experimental repository!!
+
+I am in the middle of getting this to a stable state. The installation
+process is not standard, nore is it properly documented. Additionally,
+it still requires manual patches to the base Redmine/ChiliProject application
+in order to function.
+
+In short, you likely **do not want to install it at this point...**
+
+
 * http://github.com/tomkersten/chili_pdf
 
 ## DESCRIPTION:
@@ -8,9 +18,9 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## NOTABLE ITEMS TO CONSIDER
 
-1. This plugin is distributed as a gem, but does
-   ship with migrations and asset files (stylesheets, etc). Therefore,
-   the installation procedure is not the standard process.
+1. This plugin is distributed as a gem, but does ship with migrations
+   and asset files (stylesheets, etc). Therefore, the installation
+   procedure is not the standard process.
 
 ## FEATURES:
 
@@ -18,7 +28,7 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## SCREENSHOTS:
 
-You can find a few screenshots [here](...).
+...
 
 ## PROBLEMS:
 
@@ -35,7 +45,7 @@ You can find a few screenshots [here](...).
 ## INSTALL:
 
 ```
-gem install chili_pdf
+...no published gem yet
 ```
 
 
