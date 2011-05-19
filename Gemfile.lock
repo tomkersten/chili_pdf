@@ -8,6 +8,7 @@ GEM
     hoe (2.8.0)
       rake (>= 0.8.7)
     rake (0.8.7)
+    wicked_pdf (0.7.0)
 
 PLATFORMS
   ruby
@@ -17,3 +18,4 @@ DEPENDENCIES
   autotest-rails (~> 4.1.0)
   fakeweb
   hoe (~> 2.8.0)
+  wicked_pdf

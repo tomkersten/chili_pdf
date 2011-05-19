@@ -24,7 +24,7 @@ begin
     self.version          = ChiliPDF::VERSION
     self.extra_rdoc_files = FileList['README.md', 'LICENSE', 'History.txt']
     self.summary = "ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionality using the Webkit rendering engine (via the 'wkhtmltopdf' executable)."
-    self.extra_deps       = []
+    self.extra_deps       = [['wicked_pdf', '0.7.0']]
     self.extra_dev_deps   = []
     developer('Tom Kersten', 'tom@whitespur.com')
   end

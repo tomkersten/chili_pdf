@@ -1,5 +1,6 @@
 require 'redmine'
 require 'chili_pdf'
+require 'wicked_pdf'
 
 Redmine::Plugin.register :chili_pdf do
   name 'Chili PDF plugin'
