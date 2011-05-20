@@ -12,10 +12,8 @@ Redmine::Plugin.register :chili_pdf do
   author_url 'http://tomkersten.com/'
 end
 
-Dispatcher.to_prepare do
-  require_dependency 'application_controller'
-  require 'application_controller_patch'
-  unless ApplicationController.included_modules.include? ApplicationControllerPatch
-    ApplicationController.send(:include, ApplicationControllerPatch)
-  end
+Dispatcher.to_prepare :chili_pdf do
+  require_dependency 'principal'
+  require_dependency 'user'
+  User.send(:include, UserPatch) unless User.included_modules.include? UserPatch
 end
