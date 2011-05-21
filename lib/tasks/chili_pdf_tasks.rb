@@ -8,9 +8,10 @@ class ChiliPDFTasks < Rake::TaskLib
 
   def define
     namespace :chili_pdf do
-      desc "Install ChiliPDF plugin (migrate database, include assets, etc)"
+      desc "Install ChiliPDF plugin (include assets, etc)"
       task :install => [:symlink_assets]
 
+      desc "Uninstall ChiliPDF plugin (remove assets, etc)"
       task :uninstall => [:environment] do
         puts "Removing link to ChiliPDF assets (stylesheets, js, etc)..."
         remove_symlink asset_destination_dir
