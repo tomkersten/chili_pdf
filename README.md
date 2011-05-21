@@ -73,7 +73,7 @@ config.gem 'chili_pdf'
 In your 'Rakefile', add:
 
 ``` ruby
-require 'chili_videos'
+require 'chili_pdf'
 ```
 
 Run the installation rake task (installs assets)
