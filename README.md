@@ -2,15 +2,6 @@
 
 * http://github.com/tomkersten/chili_pdf
 
-## Experimental repository!!
-
-I am in the middle of getting this to a stable state. The installation
-process is not standard, nore is it properly documented. Additionally,
-it still requires manual patches to the base Redmine/ChiliProject application
-in order to function.
-
-In short, you likely **do not want to install it at this point...**
-
 ## DESCRIPTION:
 
 ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionality using the Webkit rendering engine (via the 'wkhtmltopdf' executable).
