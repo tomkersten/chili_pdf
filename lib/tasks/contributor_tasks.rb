@@ -27,6 +27,15 @@ class ContributorTasks < Rake::TaskLib
         puts "No new contributors."
       end
     end
+
+    task :release do
+      puts "#####################"
+      puts "For the twitters"
+      puts "#####################"
+      puts "[ANN] chili_pdf v#{ChiliPDF::VERSION} released. Changes: http://bit.ly/lEfOaJ, Repo: http://bit.ly/lu5bjP /cc @chiliproject"
+      puts "#####################"
+
+    end
   end
 
   private
