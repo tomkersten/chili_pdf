@@ -1,4 +1,3 @@
-.autotest
 Gemfile
 Gemfile.lock
 History.txt
@@ -6,3 +5,15 @@ LICENSE
 Manifest.txt
 README.md
 Rakefile
+app/controllers/extended_wiki_controller.rb
+app/views/extended_wiki/show.pdf.html.erb
+app/views/layouts/pdf.pdf.erb
+assets/stylesheets/pdf.css
+autotest/discover.rb
+config/routes.rb
+init.rb
+lib/chili_pdf.rb
+lib/tasks/chili_pdf_tasks.rb
+lib/user_patch.rb
+rails/init.rb
+test/test_helper.rb
