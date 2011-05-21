@@ -25,6 +25,12 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
    server. Technically this is a dependency of the library being used to
    generate the PDFs ([wicked_pdf](https://github.com/mileszs/wicked_pdf)),
    but, it's something you should be aware of.
+1. Requires a patch to the Redmine/ChiliProject core application in order to
+   prevent a 'Double render' error on the WikiController. A pull request
+   [has been submitted](https://github.com/chiliproject/chiliproject/pull/62)
+   to the ChiliProject core team. Until then, you can manually apply the (small)
+   patch to your app if you like. The changeset can be found
+   [here](https://github.com/tomkersten/chiliproject/commit/b4e345dca9d72d8af9e8326c7cd8642e550be379).
 
 ## FEATURES:
 
@@ -34,16 +40,10 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## SCREENSHOTS:
 
-...
+You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626768112790/).
 
 ## PROBLEMS:
 
-1. Requires a patch to the Redmine/ChiliProject core application in order to
-   prevent a 'Double render' error on the WikiController. A pull request
-   [has been submitted](https://github.com/chiliproject/chiliproject/pull/62)
-   to the ChiliProject core team. Until then, you can manually apply the (small)
-   patch to your app if you like. The changeset can be found
-   [here](https://github.com/tomkersten/chiliproject/commit/b4e345dca9d72d8af9e8326c7cd8642e550be379).
 1. No other PDF exports have been implemented yet using this library, so there will
    be two PDF libraries in your application if you add this plugin. This won't cause
    any problems, but...just know that any other PDF exports you do are not a result
@@ -52,22 +52,77 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## SYNOPSIS:
 
-...
+1. Install **version 0.9.9** of the [wkhtmltopdf](http://wkhtmltopdf.googlecode.com/) executable on the machine
+   hosting ChiliProject. You can find binaries for Mac, Windows, and Linux [here](http://code.google.com/p/wkhtmltopdf/downloads/list).
+1. Install the chili\_pdf gem
+1. Cycle your application servers (Mongrel, unicorn, Passenger, etc)
+1. Visit any wiki page and manually add a '.pdf' extension to the URL
+   1. **NOTE:** You must be on an individual wiki page. Manually adding
+      the '.pdf' on the 'default wiki page' URL (/projects/:project_id/wiki)
+      will not work correctly at this time. The manual step will be removed
+      in a future release.
 
 ## REQUIREMENTS:
 
-* wicked_pdf
+* wicked\_pdf
 
 ## INSTALL:
 
 ```
-...no published gem yet
+gem install chili_pdf
 ```
 
+### Manual steps after gem installation
+
+In your 'config/environment.rb', add:
+
+``` ruby
+config.gem 'chili_pdf'
+```
+
+In your 'Rakefile', add:
+
+``` ruby
+require 'chili_videos'
+```
+
+Run the installation rake task (installs assets)
+
+```
+RAILS_ENV=production rake chili_pdf:install
+```
+
+Cycle your application server (mongrel, unicorn, etc)
 
 ## UNINSTALL:
 
-...
+Run the uninstall rake task (reverts migrations & uninstalls assets)
+
+```
+RAILS_ENV=production rake chili_pdf:uninstall
+```
+
+In your 'Rakefile', remove:
+
+``` ruby
+require 'chili_pdf'
+```
+
+In your 'config/environment.rb', remove:
+
+``` ruby
+config.gem 'chili_pdf'
+```
+
+Cycle your application server (mongrel, unicorn, whatevs)...
+
+Then, uninstall the chili_pdf gem:
+
+```
+gem uninstall chili_pdf
+```
+
+Done.
 
 ## CONTRIBUTING AND/OR SUPPORT:
 
