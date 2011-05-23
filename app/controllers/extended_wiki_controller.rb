@@ -1,6 +1,8 @@
 class ExtendedWikiController < WikiController
   unloadable
 
+  helper 'chili_pdf'
+
   def show
     super
     unless performed? # Prevent double render
@@ -16,7 +18,8 @@ class ExtendedWikiController < WikiController
                    :bottom => "0.5in",
                    :left   => "0.5in",
                    :right  => "0.5in"
-                 }
+                 },
+                 :layout => 'pdf.pdf.erb'
         }
       end
     end

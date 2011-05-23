@@ -1,5 +1,5 @@
 <% content_for :header_tags do %>
-  <%= stylesheet_link_tag '/plugin_assets/chili_pdf/stylesheets/videos' %>
+  <%= chili_pdf_stylesheets %>
 <% end %>
 
 <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
