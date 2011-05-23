@@ -6,6 +6,7 @@ Manifest.txt
 README.md
 Rakefile
 app/controllers/extended_wiki_controller.rb
+app/helpers/chili_pdf_helper.rb
 app/views/extended_wiki/show.pdf.html.erb
 app/views/layouts/pdf.pdf.erb
 assets/stylesheets/pdf.css
