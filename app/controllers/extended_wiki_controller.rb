@@ -9,7 +9,8 @@ class ExtendedWikiController < WikiController
       respond_to do |format|
         format.html {render :template => 'wiki/show'}
         format.pdf {
-          render :pdf => "#{@project.name.underscore}_#{@page.title}",
+          filename = "#{@project.name.underscore}_#{@page.title}".gsub(/\s/,'')
+          render :pdf => filename,
                  :template => 'extended_wiki/show.pdf.html.erb',
                  :page_size => "Letter",
                  :user_style_sheet => "#{Rails.root}/public/plugin_assets/chili_pdf/stylesheets/pdf.css",
