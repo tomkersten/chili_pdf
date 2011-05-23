@@ -1,3 +1,14 @@
+=== 0.2.0 / 2011-05-23
+
+* Fixed layout & stylesheet inclusions
+  * HTML template for PDF rendering was not being wrapped in a layout
+  * Added ChiliPdfHelper#chili_pdf_stylesheets to inline (fix)
+    CSS inclusions in generated PDFs
+* Added HTML debugging (add ?debug=true to URL)
+* Removed blank spaces from default filename on PDF
+* Fixed 'rake chili_pdf:install' so it will remove an existing plugin
+  asset directory before attempting to symlink.
+
 == 0.1.0 2011-05-20
 
 * 1 major enhancement:
