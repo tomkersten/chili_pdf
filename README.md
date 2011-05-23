@@ -73,7 +73,7 @@ config.gem 'chili_pdf'
 In your 'Rakefile', add:
 
 ``` ruby
-require 'chili_pdf'
+require 'tasks/chili_pdf_tasks'
 ```
 
 Run the installation rake task (installs assets)
