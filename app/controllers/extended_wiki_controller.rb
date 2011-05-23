@@ -13,6 +13,7 @@ class ExtendedWikiController < WikiController
           render :pdf => filename,
                  :template => 'extended_wiki/show.pdf.html.erb',
                  :page_size => "Letter",
+                 :show_as_html => params[:debug],
                  :margin => {
                    :top    => "0.5in",
                    :bottom => "0.5in",
