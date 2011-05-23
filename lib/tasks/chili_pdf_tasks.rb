@@ -22,6 +22,7 @@ class ChiliPDFTasks < Rake::TaskLib
       task :symlink_assets => [:environment] do
         # HACK: Symlinks the files from plugindir/assets to the appropriate place in
         # the rails application
+        remove_symlink(asset_destination_dir)
         puts "Symlinking assets (stylesheets, etc)..."
         add_symlink asset_source_dir, asset_destination_dir
       end
@@ -50,7 +51,8 @@ class ChiliPDFTasks < Rake::TaskLib
     end
 
     def remove_symlink(symlink_file)
-      system("unlink #{symlink_file}") if File.exists?(symlink_file)
+      File.unlink(symlink_file)
+    rescue Errno::ENOENT # file did not exist...ignore this error
     end
 
     def add_symlink(source, destination)
