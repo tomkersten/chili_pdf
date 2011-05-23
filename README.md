@@ -95,7 +95,7 @@ RAILS_ENV=production rake chili_pdf:uninstall
 In your 'Rakefile', remove:
 
 ``` ruby
-require 'chili_pdf'
+require 'tasks/chili_pdf_tasks'
 ```
 
 In your 'config/environment.rb', remove:
