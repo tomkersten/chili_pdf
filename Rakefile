@@ -11,7 +11,7 @@ RedminePluginSupport::Base.setup do |plugin|
   plugin.redmine_root = File.expand_path(File.dirname(__FILE__) + '/../../../')
 end
 
-Dir["/lib/tasks/**/*.rake"].sort.each { |ext| load ext }
+Dir["lib/tasks/**/*.rake"].sort.each { |ext| load ext }
 
 task :default => [:test]
 
