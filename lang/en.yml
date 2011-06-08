@@ -1,0 +1,3 @@
+chili_pdf_instructions: 'You can customize the behavior of the ChiliPDf plugin with the settings below'
+header_enabled_label: Display page header?
+footer_enabled_label: Display page footer?

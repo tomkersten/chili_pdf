@@ -29,7 +29,8 @@ class FormatterTest < Test::Unit::TestCase
 
   def test_default_header_options_no_header_title
     filename = 'filename.pdf'
-    default_header = {:font_size => 8, :left => filename, :line => true}
+    default_header = {:font_size => 8, :left => filename, :line => true, :spacing => 2}
+
     render_options = Formatter.render_options(filename)
     assert_equal default_header, render_options[:header]
   end
@@ -38,14 +39,45 @@ class FormatterTest < Test::Unit::TestCase
     header_text = 'Header Title'
     render_options = Formatter.render_options('filename.pdf', header_text)
 
-    default_header = {:font_size => 8, :left => header_text, :line => true}
+    default_header = {:font_size => 8, :left => header_text, :line => true, :spacing => 2}
     assert_equal default_header, render_options[:header]
   end
 
-  def test_default_footer_options
-    date = Time.now.strftime('%d-%b-%Y')
-    default_footer = {:font_size => 8, :left => date, :right => "[page]/[topage]", :line => true}
-    render_options = Formatter.render_options('filename.pdf')
-    assert_equal default_footer, render_options[:footer]
+  context 'when footers are enabled' do
+    should 'include footer options' do
+      ChiliPDF::Config.update({ChiliPDF::Config::FOOTER_ENABLED_KEYNAME => ChiliPDF::Config::ENABLED_VALUE})
+      date = Time.now.strftime('%d-%b-%Y')
+      default_footer = {:font_size => 8, :left => date, :right => "[page]/[topage]", :line => true}
+
+      assert ChiliPDF::Config.footer_enabled?
+      assert ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:footer)
+    end
+  end
+
+  context 'when footers are disabled' do
+    should "not include a 'footer' key" do
+      ChiliPDF::Config.update(ChiliPDF::Config::FOOTER_ENABLED_KEYNAME => ChiliPDF::Config::DISABLED_VALUE)
+
+      assert !ChiliPDF::Config.footer_enabled?
+      assert !ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:footer)
+    end
+  end
+
+  context 'when headers are enabled' do
+    should 'include header options' do
+      ChiliPDF::Config.update({ChiliPDF::Config::HEADER_ENABLED_KEYNAME => ChiliPDF::Config::ENABLED_VALUE})
+
+      assert ChiliPDF::Config.header_enabled?
+      assert ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:header)
+    end
+  end
+
+  context 'when headers are disabled' do
+    should "not include a 'header' key" do
+      ChiliPDF::Config.update(ChiliPDF::Config::HEADER_ENABLED_KEYNAME => ChiliPDF::Config::DISABLED_VALUE)
+
+      assert !ChiliPDF::Config.header_enabled?
+      assert !ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:header)
+    end
   end
 end
