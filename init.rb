@@ -12,7 +12,7 @@ Redmine::Plugin.register :chili_pdf do
   author_url 'http://tomkersten.com/'
 
   settings :partial => 'settings/chili_pdf_settings',
-           :default => {:header_enabled => '1', :footer_enabled => '1'}
+           :default => ChiliPDF::Config.defaults
 end
 
 Dispatcher.to_prepare :chili_pdf do
