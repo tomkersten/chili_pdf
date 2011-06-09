@@ -6,6 +6,8 @@ module ChiliPDF
     DEFAULT_MARGIN = '0.5in'
     DEFAULT_PAGE_SIZE = "Letter"
     DEFAULT_PAGE_TITLE = "Untitled"
+    DEFAULT_LAYOUT = 'pdf.pdf.erb'
+    DEFAULT_VIEW_TEMPLATE  = 'extended_wiki/show.pdf.html.erb'
     DYNAMIC_TOKEN_MAPPINGS = {:current_page => '[page]',
                               :total_pages => '[topage]',
                               :datestamp => lambda {Time.now.strftime('%d-%b-%Y')},
@@ -20,7 +22,7 @@ module ChiliPDF
 
       default_options = {
         :pdf => filename,
-        :template => 'extended_wiki/show.pdf.html.erb',
+        :template => view_template,
         :page_size => DEFAULT_PAGE_SIZE,
         :margin => {
           :top    => DEFAULT_MARGIN,
@@ -28,7 +30,7 @@ module ChiliPDF
           :left   => DEFAULT_MARGIN,
           :right  => DEFAULT_MARGIN
         },
-        :layout => 'pdf.pdf.erb'
+        :layout => DEFAULT_LAYOUT
       }
 
       default_options.merge!(footer_options) if ChiliPDF::Config.footer_enabled?
@@ -72,6 +74,10 @@ module ChiliPDF
       def calculate_quarter
         month = Time.now.strftime('%m').to_i
         ((month - 1) / 3) + 1
+      end
+
+      def view_template
+        DEFAULT_VIEW_TEMPLATE
       end
   end
 end
