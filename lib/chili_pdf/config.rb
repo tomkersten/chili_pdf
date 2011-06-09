@@ -15,7 +15,7 @@ module ChiliPDF
     FOOTER_CENTER_KEYNAME = :footer_content_center
     FOOTER_RIGHT_KEYNAME  = :footer_content_right
 
-    HEADER_LEFT_DEFAULT_VALUE   = '{{page_name}}'
+    HEADER_LEFT_DEFAULT_VALUE   = '{{page_title}}'
     HEADER_CENTER_DEFAULT_VALUE = ''
     HEADER_RIGHT_DEFAULT_VALUE  = ''
     FOOTER_LEFT_DEFAULT_VALUE   = '{{datestamp}}'
@@ -60,7 +60,7 @@ module ChiliPDF
     #
     # Returns true. Always.
     def update(options)
-      Setting[PLUGIN_KEYNAME] = options
+      Setting[PLUGIN_KEYNAME] = defaults.merge(options)
       true
     end
 

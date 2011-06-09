@@ -14,10 +14,14 @@ class ExtendedWikiController < WikiController
 
   private
     def pdf_render_options
-      ChiliPDF::Formatter.render_options(filename)
+      ChiliPDF::Formatter.render_options(filename, page_title)
     end
 
     def filename
       "#{@project.name.underscore}_#{@page.title}".gsub(/\s/,'')
+    end
+
+    def page_title
+      "#{@project.name}, #{@page.title}"
     end
 end
