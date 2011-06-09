@@ -8,3 +8,51 @@
   <%= check_box_tag "settings[#{ChiliPDF::Config::FOOTER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.footer_enabled? %>
 </p>
 
+<h3>Custom Header/Footer Content</h3>
+
+<h4>Rules</h4>
+<ol>
+  <li>Any "plain text" will render, as is...</li>
+  <li>
+    There are a few 'variables' you can use to dynamically replace content. For example,
+    you can add the current date to any page.
+  </li>
+  <li>All input will be escaped HTML, so injecting dynamic content via JavaScript will not work.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td>Left</td>
+      <td>Center</td>
+      <td>Right</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Header</td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_LEFT_KEYNAME}]", ChiliPDF::Config.header_values[:left] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_CENTER_KEYNAME}]", ChiliPDF::Config.header_values[:center] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_RIGHT_KEYNAME}]", ChiliPDF::Config.header_values[:right] %>
+      </td>
+    </tr>
+    <tr>
+      <td>Footer</td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_LEFT_KEYNAME}]", ChiliPDF::Config.footer_values[:left] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_CENTER_KEYNAME}]", ChiliPDF::Config.footer_values[:center] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_RIGHT_KEYNAME}]", ChiliPDF::Config.footer_values[:right] %>
+      </td>
+    </tr>
+  </tbody>
+</table>

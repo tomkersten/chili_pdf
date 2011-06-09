@@ -5,9 +5,18 @@ module ChiliPDF
     HEADER_FOOTER_FONT_SIZE = 8
     DEFAULT_MARGIN = '0.5in'
     DEFAULT_PAGE_SIZE = "Letter"
+    DEFAULT_PAGE_TITLE = "Untitled"
+    DYNAMIC_TOKEN_MAPPINGS = {:current_page => '[page]',
+                              :total_pages => '[topage]',
+                              :datestamp => lambda {Time.now.strftime('%d-%b-%Y')},
+                              :current_quarter  => lambda {calculate_quarter.to_s},
+                              :current_year     => lambda {Time.now.strftime('%Y')},
+                              :page_title       => lambda {@page_title || DEFAULT_PAGE_TITLE}
+                             }
 
-    def render_options(filename, header_title = nil)
-      header_title ||= filename
+    def render_options(filename, page_title = nil)
+      # set @page_title instance variable so #replace_tokens_in can access it
+      @page_title = page_title
 
       default_options = {
         :pdf => filename,
@@ -23,32 +32,46 @@ module ChiliPDF
       }
 
       default_options.merge!(footer_options) if ChiliPDF::Config.footer_enabled?
-      default_options.merge!(header_options(header_title)) if ChiliPDF::Config.header_enabled?
+      default_options.merge!(header_options) if ChiliPDF::Config.header_enabled?
       default_options
     end
 
     private
-      def datestamp
-        Time.now.strftime('%d-%b-%Y')
-      end
-
       def footer_options
         {:footer => {
           :font_size => 8,
-          :left => datestamp,
-          :right => '[page]/[topage]',
           :line => true,
           :spacing => 2
-        }}
+        }.merge(substitute_tokens(ChiliPDF::Config.footer_values))}
       end
 
-      def header_options(title)
+      def header_options
         {:header => {
           :font_size => HEADER_FOOTER_FONT_SIZE,
-          :left => title,
           :line => true,
           :spacing => 2
-        }}
+        }.merge(substitute_tokens(ChiliPDF::Config.header_values))}
+      end
+
+      def substitute_tokens(hash)
+        hash.inject({}) do |converted_list, unconverted_item|
+          key,value = unconverted_item
+          converted_list.merge({key => replace_tokens_in(value)})
+        end
+      end
+
+      def replace_tokens_in(string)
+        cloned_string = string.dup
+        DYNAMIC_TOKEN_MAPPINGS.each do |dynamic_token, rep_content|
+          replacement_text = rep_content.is_a?(Proc) ? rep_content.call : rep_content
+          cloned_string.gsub!(/\{\{#{dynamic_token.to_s}\}\}/, replacement_text)
+        end
+        cloned_string
+      end
+
+      def calculate_quarter
+        month = Time.now.strftime('%m').to_i
+        ((month - 1) / 3) + 1
       end
   end
 end
