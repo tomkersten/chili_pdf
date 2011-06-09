@@ -14,7 +14,7 @@ class ExtendedWikiController < WikiController
 
   private
     def pdf_render_options
-      ChiliPDF::Formatter.render_options(filename, @page.title)
+      ChiliPDF::Formatter.render_options(filename)
     end
 
     def filename

@@ -9,9 +9,9 @@ class ConfigTest < ActiveSupport::TestCase
     context 'when no customizations have taken place' do
       should "return the 'defaults' values for the header fields" do
         defaults = {
-                     'left'   => ChiliPDF::Config.defaults[ChiliPDF::Config::HEADER_LEFT_KEYNAME],
-                     'center' => ChiliPDF::Config.defaults[ChiliPDF::Config::HEADER_CENTER_KEYNAME],
-                     'right'  => ChiliPDF::Config.defaults[ChiliPDF::Config::HEADER_RIGHT_KEYNAME]
+                     :left   => ChiliPDF::Config.defaults[ChiliPDF::Config::HEADER_LEFT_KEYNAME],
+                     :center => ChiliPDF::Config.defaults[ChiliPDF::Config::HEADER_CENTER_KEYNAME],
+                     :right  => ChiliPDF::Config.defaults[ChiliPDF::Config::HEADER_RIGHT_KEYNAME]
                    }
         assert_equal defaults, ChiliPDF::Config.header_values
       end
@@ -40,9 +40,9 @@ class ConfigTest < ActiveSupport::TestCase
     context 'when no customizations have taken place' do
       should "return the 'defaults' values for the footer fields" do
         defaults = {
-                     'left'   => ChiliPDF::Config.defaults[ChiliPDF::Config::FOOTER_LEFT_KEYNAME],
-                     'center' => ChiliPDF::Config.defaults[ChiliPDF::Config::FOOTER_CENTER_KEYNAME],
-                     'right'  => ChiliPDF::Config.defaults[ChiliPDF::Config::FOOTER_RIGHT_KEYNAME]
+                     :left   => ChiliPDF::Config.defaults[ChiliPDF::Config::FOOTER_LEFT_KEYNAME],
+                     :center => ChiliPDF::Config.defaults[ChiliPDF::Config::FOOTER_CENTER_KEYNAME],
+                     :right  => ChiliPDF::Config.defaults[ChiliPDF::Config::FOOTER_RIGHT_KEYNAME]
                    }
         assert_equal defaults, ChiliPDF::Config.footer_values
       end

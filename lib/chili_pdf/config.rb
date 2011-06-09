@@ -8,19 +8,19 @@ module ChiliPDF
     FOOTER_ENABLED_KEYNAME = 'footer_enabled'
     HEADER_ENABLED_KEYNAME = 'header_enabled'
 
-    HEADER_LEFT_KEYNAME   = 'header_content_left'
-    HEADER_CENTER_KEYNAME = 'header_content_center'
-    HEADER_RIGHT_KEYNAME  = 'header_content_right'
-    FOOTER_LEFT_KEYNAME   = 'footer_content_left'
-    FOOTER_CENTER_KEYNAME = 'footer_content_center'
-    FOOTER_RIGHT_KEYNAME  = 'footer_content_right'
+    HEADER_LEFT_KEYNAME   = :header_content_left
+    HEADER_CENTER_KEYNAME = :header_content_center
+    HEADER_RIGHT_KEYNAME  = :header_content_right
+    FOOTER_LEFT_KEYNAME   = :footer_content_left
+    FOOTER_CENTER_KEYNAME = :footer_content_center
+    FOOTER_RIGHT_KEYNAME  = :footer_content_right
 
-    HEADER_LEFT_DEFAULT_VALUE   = 'default left header'
-    HEADER_CENTER_DEFAULT_VALUE = 'default center header'
-    HEADER_RIGHT_DEFAULT_VALUE  = 'default right header'
-    FOOTER_LEFT_DEFAULT_VALUE   = 'default left footer'
-    FOOTER_CENTER_DEFAULT_VALUE = 'default center footer'
-    FOOTER_RIGHT_DEFAULT_VALUE  = 'default right footer'
+    HEADER_LEFT_DEFAULT_VALUE   = '{{page_name}}'
+    HEADER_CENTER_DEFAULT_VALUE = ''
+    HEADER_RIGHT_DEFAULT_VALUE  = ''
+    FOOTER_LEFT_DEFAULT_VALUE   = '{{datestamp}}'
+    FOOTER_CENTER_DEFAULT_VALUE = ''
+    FOOTER_RIGHT_DEFAULT_VALUE  = '{{current_page}}/{{total_pages}}'
 
     def defaults
       {
@@ -60,7 +60,7 @@ module ChiliPDF
     #
     # Returns true. Always.
     def update(options)
-      Setting[PLUGIN_KEYNAME] = formatted_hash(options)
+      Setting[PLUGIN_KEYNAME] = options
       true
     end
 
@@ -74,27 +74,27 @@ module ChiliPDF
 
     private
       def default_header_values
-        formatted_hash({:left => HEADER_LEFT_DEFAULT_VALUE,
-                        :center => HEADER_CENTER_DEFAULT_VALUE,
-                        :right => HEADER_RIGHT_DEFAULT_VALUE})
+        {:left => HEADER_LEFT_DEFAULT_VALUE,
+         :center => HEADER_CENTER_DEFAULT_VALUE,
+         :right => HEADER_RIGHT_DEFAULT_VALUE}
       end
 
       def stored_header_settings
-        formatted_hash({:left => plugin_settings[HEADER_LEFT_KEYNAME],
-                        :center => plugin_settings[HEADER_CENTER_KEYNAME],
-                        :right => plugin_settings[HEADER_RIGHT_KEYNAME]}).reject {|k,v| v.nil?}
+        {:left => plugin_settings[HEADER_LEFT_KEYNAME],
+         :center => plugin_settings[HEADER_CENTER_KEYNAME],
+         :right => plugin_settings[HEADER_RIGHT_KEYNAME]}.reject {|k,v| v.nil?}
       end
 
       def default_footer_values
-        formatted_hash({:left  => FOOTER_LEFT_DEFAULT_VALUE,
-                       :center => FOOTER_CENTER_DEFAULT_VALUE,
-                       :right  => FOOTER_RIGHT_DEFAULT_VALUE})
+        {:left  => FOOTER_LEFT_DEFAULT_VALUE,
+         :center => FOOTER_CENTER_DEFAULT_VALUE,
+         :right  => FOOTER_RIGHT_DEFAULT_VALUE}
       end
 
       def stored_footer_settings
-        formatted_hash({:left => plugin_settings[FOOTER_LEFT_KEYNAME],
-                        :center => plugin_settings[FOOTER_CENTER_KEYNAME],
-                        :right => plugin_settings[FOOTER_RIGHT_KEYNAME]}).reject {|k,v| v.nil?}
+        {:left => plugin_settings[FOOTER_LEFT_KEYNAME],
+         :center => plugin_settings[FOOTER_CENTER_KEYNAME],
+         :right => plugin_settings[FOOTER_RIGHT_KEYNAME]}.reject {|k,v| v.nil?}
       end
 
       def footer_enabled
@@ -106,11 +106,7 @@ module ChiliPDF
       end
 
       def plugin_settings
-        HashWithIndifferentAccess.new(Setting[PLUGIN_KEYNAME])
-      end
-
-      def formatted_hash(hash)
-        HashWithIndifferentAccess.new(hash)
+        Setting[PLUGIN_KEYNAME]
       end
   end
 end
