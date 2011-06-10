@@ -4,19 +4,19 @@ module ChiliPDF
 
     MAPPINGS = {:current_page => {
                    :replacement_object  => "[page]",
-                   :description         => "Returns the current page of the PDF document."},
+                   :description         => "The current page of the PDF document."},
                 :total_pages => {
                    :replacement_object  => '[topage]',
-                   :description         => "Returns the total number of pages in the PDF document."},
+                   :description         => "The total number of pages in the PDF document."},
                 :datestamp => {
                    :replacement_object  => lambda {Time.now.strftime('%d-%b-%Y')},
-                   :description         => "Returns the current date in the format of DD-MON-YYYY'"},
+                   :description         => "The current date in the format of DD-MON-YYYY'"},
                 :current_quarter => {
                    :replacement_object => lambda {calculate_quarter.to_s},
-                   :description        => "Returns the current fiscal quarter (assuming Jan-Mar is thefirst quarter). Example output: '1'"},
+                   :description        => "The current fiscal quarter (assuming Jan-Mar is thefirst quarter). Example output: '1'."},
                 :current_year => {
                    :replacement_object => lambda {Time.now.strftime('%Y')},
-                   :description        => "Returns the current year in YYYY-format"}}
+                   :description        => "The current year in YYYY-format"}}
 
     def tokens
       raw_tokens.map {|matcher, meta|

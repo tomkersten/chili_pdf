@@ -1,3 +1,7 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag '/plugin_assets/chili_pdf/stylesheets/pdf' %>
+<% end %>
+
 <p>
   <label for='settings_<%= ChiliPDF::Config::HEADER_ENABLED_KEYNAME %>'><%= l(:header_enabled_label) %></label>
   <%= check_box_tag "settings[#{ChiliPDF::Config::HEADER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.header_enabled? %>
@@ -56,3 +60,23 @@
     </tr>
   </tbody>
 </table>
+
+<div id="pdf-token-help">
+  <h4>Dynamic text legend</h4>
+  <table>
+    <thead>
+      <tr>
+        <td>Enter this</td>
+        <td>...to show this</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%- ChiliPDF::TokenManager.tokens.each do |token| %>
+        <tr>
+          <td class="token"><%= token.matcher_with_delimiters %></td>
+          <td class="description"><%= token.description %></td>
+        </tr>
+      <%- end %>
+    </tbody>
+  </table>
+</div>

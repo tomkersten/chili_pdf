@@ -54,6 +54,9 @@ module ChiliPDF
       string.gsub(replacement_regexp(string), replacement_value.to_s)
     end
 
+    def matcher_with_delimiters
+      "#{STARTING_DELIMITER}#{matcher}#{ENDING_DELIMITER}"
+    end
     private
       def replacement_regexp(string)
         Regexp.new(/#{escaped(STARTING_DELIMITER)}#{matcher.to_s}#{escaped(ENDING_DELIMITER)}/)

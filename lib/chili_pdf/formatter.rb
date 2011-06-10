@@ -9,13 +9,20 @@ module ChiliPDF
 
     attr_reader :page_title
 
+    # TODO: Hack...need to come up with better approach for this...
+    TokenManager.add_token_definition do
+      {:page_title => {:replacement_object => (DEFAULT_PAGE_TITLE),
+                       :description        => "The project & wiki page name (eg: 'My Project, Wiki Page Title')"}}
+    end
+
     def initialize(filename, title = nil)
       @page_title = title
       @filename = filename
 
+      # TODO: Hack...need to come up with better approach for this...
       TokenManager.add_token_definition do
         {:page_title => {:replacement_object => (@page_title || DEFAULT_PAGE_TITLE),
-                         :description        => "Returns the formatter's page title"}}
+                         :description        => "The project & wiki page name (eg: 'My Project, Wiki Page Title')"}}
       end
     end
 
