@@ -99,7 +99,7 @@ class FormatterTest < Test::Unit::TestCase
           @formatter = ChiliPDF::Formatter.new('filename.pdf', @custom_title)
         end
 
-        should "substitues '{{page_title}}' with a string value passed in as the 'page_title' argument" do
+        should "substitute '{{page_title}}' with a string value passed in as the 'page_title' argument" do
           set_header_field_to "{{page_title}}"
 
           assert ChiliPDF::Config.footer_enabled?
