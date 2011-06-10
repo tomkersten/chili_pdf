@@ -1,7 +1,5 @@
 module ChiliPDF
-  module Formatter
-    extend self
-
+  class Formatter
     HEADER_FOOTER_FONT_SIZE = 8
     DEFAULT_MARGIN = '0.5in'
     DEFAULT_PAGE_SIZE = "Letter"
@@ -13,15 +11,19 @@ module ChiliPDF
                               :datestamp => lambda {Time.now.strftime('%d-%b-%Y')},
                               :current_quarter  => lambda {calculate_quarter.to_s},
                               :current_year     => lambda {Time.now.strftime('%Y')},
-                              :page_title       => lambda {@page_title || DEFAULT_PAGE_TITLE}
+                              :page_title       => lambda {|frmtr| frmtr.page_title || DEFAULT_PAGE_TITLE}
                              }
 
-    def render_options(filename, page_title = nil)
-      # set @page_title instance variable so #replace_tokens_in can access it
-      @page_title = page_title
+    attr_reader :page_title
 
+    def initialize(filename, title = nil)
+      @page_title = title
+      @filename = filename
+    end
+
+    def render_options
       default_options = {
-        :pdf => filename,
+        :pdf => @filename,
         :template => view_template,
         :page_size => DEFAULT_PAGE_SIZE,
         :margin => {
@@ -65,13 +67,13 @@ module ChiliPDF
       def replace_tokens_in(string)
         cloned_string = string.dup
         DYNAMIC_TOKEN_MAPPINGS.each do |dynamic_token, rep_content|
-          replacement_text = rep_content.is_a?(Proc) ? rep_content.call : rep_content
+          replacement_text = rep_content.is_a?(Proc) ? rep_content.call(self) : rep_content
           cloned_string.gsub!(/\{\{#{dynamic_token.to_s}\}\}/, replacement_text)
         end
         cloned_string
       end
 
-      def calculate_quarter
+      def self.calculate_quarter
         month = Time.now.strftime('%m').to_i
         ((month - 1) / 3) + 1
       end

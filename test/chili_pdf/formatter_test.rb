@@ -2,28 +2,28 @@ require 'test_helper'
 
 class FormatterTest < Test::Unit::TestCase
   def test_default_layout
-    render_options = Formatter.render_options('filename.pdf')
+    render_options = Formatter.new('filename.pdf').render_options
     assert_equal 'pdf.pdf.erb', render_options[:layout]
   end
 
   def test_render_options_returns_hash_with_pdf_filename_set
-    render_options = Formatter.render_options('filename.pdf')
+    render_options = Formatter.new('filename.pdf').render_options
     assert_equal 'filename.pdf', render_options[:pdf]
   end
 
   def test_default_template
-    render_options = Formatter.render_options('filename.pdf')
+    render_options = Formatter.new('filename.pdf').render_options
     assert_equal 'extended_wiki/show.pdf.html.erb', render_options[:template]
   end
 
   def test_default_page_size
-    render_options = Formatter.render_options('filename.pdf')
+    render_options = Formatter.new('filename.pdf').render_options
     assert_equal 'Letter', render_options[:page_size]
   end
 
   def test_default_margins
     default_margins = {:top => "0.5in", :bottom => "0.5in", :left => "0.5in", :right => "0.5in"}
-    render_options = Formatter.render_options('filename.pdf')
+    render_options = Formatter.new('filename.pdf').render_options
     assert_equal default_margins, render_options[:margin]
   end
 
@@ -34,7 +34,7 @@ class FormatterTest < Test::Unit::TestCase
 
     should 'include footer options' do
       assert ChiliPDF::Config.footer_enabled?
-      assert ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:footer)
+      assert ChiliPDF::Formatter.new('filename.pdf').render_options.has_key?(:footer)
     end
   end
 
@@ -45,7 +45,7 @@ class FormatterTest < Test::Unit::TestCase
 
     should "not include a 'footer' key" do
       assert !ChiliPDF::Config.footer_enabled?
-      assert !ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:footer)
+      assert !ChiliPDF::Formatter.new('filename.pdf').render_options.has_key?(:footer)
     end
   end
 
@@ -54,7 +54,7 @@ class FormatterTest < Test::Unit::TestCase
       ChiliPDF::Config.update({ChiliPDF::Config::HEADER_ENABLED_KEYNAME => ChiliPDF::Config::ENABLED_VALUE})
 
       assert ChiliPDF::Config.header_enabled?
-      assert ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:header)
+      assert ChiliPDF::Formatter.new('filename.pdf').render_options.has_key?(:header)
     end
   end
 
@@ -63,7 +63,7 @@ class FormatterTest < Test::Unit::TestCase
       ChiliPDF::Config.update(ChiliPDF::Config::HEADER_ENABLED_KEYNAME => ChiliPDF::Config::DISABLED_VALUE)
 
       assert !ChiliPDF::Config.header_enabled?
-      assert !ChiliPDF::Formatter.render_options('filename.pdf').has_key?(:header)
+      assert !ChiliPDF::Formatter.new('filename.pdf').render_options.has_key?(:header)
     end
   end
 
@@ -72,14 +72,14 @@ class FormatterTest < Test::Unit::TestCase
       ChiliPDF::Config.update({ChiliPDF::Config::HEADER_LEFT_KEYNAME => "{{current_page}}"})
 
       assert ChiliPDF::Config.footer_enabled?
-      assert_equal '[page]', ChiliPDF::Formatter.render_options('filename.pdf')[:header][:left]
+      assert_equal '[page]', ChiliPDF::Formatter.new('filename.pdf').render_options[:header][:left]
     end
 
     should "substitues '{{total_pages}}' with '[topage]'" do
       ChiliPDF::Config.update({ChiliPDF::Config::HEADER_LEFT_KEYNAME => "{{total_pages}}"})
 
       assert ChiliPDF::Config.footer_enabled?
-      assert_equal '[topage]', ChiliPDF::Formatter.render_options('filename.pdf')[:header][:left]
+      assert_equal '[topage]', ChiliPDF::Formatter.new('filename.pdf').render_options[:header][:left]
     end
 
     should "substitues '{{datestamp}}' with a date formated as 'DD-MON-YYYY'" do
@@ -87,7 +87,7 @@ class FormatterTest < Test::Unit::TestCase
       todays_date = Time.now.strftime('%d-%b-%Y')
 
       assert ChiliPDF::Config.footer_enabled?
-      assert_equal todays_date, ChiliPDF::Formatter.render_options('filename.pdf')[:header][:left]
+      assert_equal todays_date, ChiliPDF::Formatter.new('filename.pdf').render_options[:header][:left]
     end
 
     context "when a page title is supplied" do
@@ -96,7 +96,7 @@ class FormatterTest < Test::Unit::TestCase
         custom_title = 'Custom title'
 
         assert ChiliPDF::Config.footer_enabled?
-        assert_equal custom_title, ChiliPDF::Formatter.render_options('filename.pdf', custom_title)[:header][:left]
+        assert_equal custom_title, ChiliPDF::Formatter.new('filename.pdf', custom_title).render_options[:header][:left]
       end
     end
 
@@ -105,7 +105,7 @@ class FormatterTest < Test::Unit::TestCase
         ChiliPDF::Config.update({ChiliPDF::Config::HEADER_LEFT_KEYNAME => "{{page_title}}"})
 
         assert ChiliPDF::Config.footer_enabled?
-        assert_equal ChiliPDF::Formatter::DEFAULT_PAGE_TITLE, ChiliPDF::Formatter.render_options('filename.pdf')[:header][:left]
+        assert_equal ChiliPDF::Formatter::DEFAULT_PAGE_TITLE, ChiliPDF::Formatter.new('filename.pdf').render_options[:header][:left]
       end
     end
 
@@ -115,7 +115,7 @@ class FormatterTest < Test::Unit::TestCase
       todays_date = Time.now.strftime('%Y')
 
       assert ChiliPDF::Config.footer_enabled?
-      assert_equal todays_date, ChiliPDF::Formatter.render_options('filename.pdf')[:header][:left]
+      assert_equal todays_date, ChiliPDF::Formatter.new('filename.pdf').render_options[:header][:left]
     end
 
     should "substitues '{{current_quarter}}' with a string value of 1, 2, 3, 4...depending on month of year" do
@@ -124,7 +124,7 @@ class FormatterTest < Test::Unit::TestCase
       expected = (((month - 1) / 3) + 1).to_s
 
       assert ChiliPDF::Config.footer_enabled?
-      assert_equal expected, ChiliPDF::Formatter.render_options('filename.pdf')[:header][:left]
+      assert_equal expected, ChiliPDF::Formatter.new('filename.pdf').render_options[:header][:left]
     end
   end
 end
