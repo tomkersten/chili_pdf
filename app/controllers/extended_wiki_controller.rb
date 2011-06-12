@@ -7,14 +7,14 @@ class ExtendedWikiController < WikiController
     super
     unless performed? # Prevent double render
       respond_to do |format|
-        format.pdf {render pdf_render_options}
+        format.pdf {render formatter.render_options}
       end
     end
   end
 
   private
-    def pdf_render_options
-      ChiliPDF::Formatter.render_options(filename, page_title)
+    def formatter
+      ChiliPDF::Formatter.new(filename, page_title)
     end
 
     def filename

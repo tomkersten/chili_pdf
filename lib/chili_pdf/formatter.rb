@@ -1,27 +1,34 @@
 module ChiliPDF
-  module Formatter
-    extend self
-
+  class Formatter
     HEADER_FOOTER_FONT_SIZE = 8
     DEFAULT_MARGIN = '0.5in'
     DEFAULT_PAGE_SIZE = "Letter"
     DEFAULT_PAGE_TITLE = "Untitled"
     DEFAULT_LAYOUT = 'pdf.pdf.erb'
     DEFAULT_VIEW_TEMPLATE  = 'extended_wiki/show.pdf.html.erb'
-    DYNAMIC_TOKEN_MAPPINGS = {:current_page => '[page]',
-                              :total_pages => '[topage]',
-                              :datestamp => lambda {Time.now.strftime('%d-%b-%Y')},
-                              :current_quarter  => lambda {calculate_quarter.to_s},
-                              :current_year     => lambda {Time.now.strftime('%Y')},
-                              :page_title       => lambda {@page_title || DEFAULT_PAGE_TITLE}
-                             }
 
-    def render_options(filename, page_title = nil)
-      # set @page_title instance variable so #replace_tokens_in can access it
-      @page_title = page_title
+    attr_reader :page_title
 
+    # TODO: Hack...need to come up with better approach for this...
+    TokenManager.add_token_definition do
+      {:page_title => {:replacement_object => (DEFAULT_PAGE_TITLE),
+                       :description        => "The project & wiki page name (eg: 'My Project, Wiki Page Title')"}}
+    end
+
+    def initialize(filename, title = nil)
+      @page_title = title
+      @filename = filename
+
+      # TODO: Hack...need to come up with better approach for this...
+      TokenManager.add_token_definition do
+        {:page_title => {:replacement_object => (@page_title || DEFAULT_PAGE_TITLE),
+                         :description        => "The project & wiki page name (eg: 'My Project, Wiki Page Title')"}}
+      end
+    end
+
+    def render_options
       default_options = {
-        :pdf => filename,
+        :pdf => @filename,
         :template => view_template,
         :page_size => DEFAULT_PAGE_SIZE,
         :margin => {
@@ -57,23 +64,13 @@ module ChiliPDF
 
       def substitute_tokens(hash)
         hash.inject({}) do |converted_list, unconverted_item|
-          key,value = unconverted_item
-          converted_list.merge({key => replace_tokens_in(value)})
+          header_location,header_location_value = unconverted_item
+          converted_list.merge({header_location => replace_tokens_in(header_location_value)})
         end
       end
 
       def replace_tokens_in(string)
-        cloned_string = string.dup
-        DYNAMIC_TOKEN_MAPPINGS.each do |dynamic_token, rep_content|
-          replacement_text = rep_content.is_a?(Proc) ? rep_content.call : rep_content
-          cloned_string.gsub!(/\{\{#{dynamic_token.to_s}\}\}/, replacement_text)
-        end
-        cloned_string
-      end
-
-      def calculate_quarter
-        month = Time.now.strftime('%m').to_i
-        ((month - 1) / 3) + 1
+        TokenManager.apply_tokens_to string
       end
 
       def view_template
