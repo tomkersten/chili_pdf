@@ -30,7 +30,7 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## SCREENSHOTS:
 
-You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626768112790/).
+You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626827940413/).
 
 ## PROBLEMS:
 

@@ -1,0 +1,14 @@
+Autotest.add_hook(:initialize) {|at|
+  %w{.git .svn .hg .swp .DS_Store ._* tmp}.each do |exception|
+    at.add_exception(exception)
+  end
+
+  at.add_mapping(%r%^test/chili_pdf/.*_test.rb$%) { |filename, _|
+    filename
+  }
+  at.add_mapping(/test_helper.rb/) {
+    at.files_matching /^test.*rb$/
+  }
+  #nil
+}
+

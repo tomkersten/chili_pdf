@@ -22,7 +22,6 @@ class ChiliPDFTasks < Rake::TaskLib
       task :symlink_assets => [:environment] do
         # HACK: Symlinks the files from plugindir/assets to the appropriate place in
         # the rails application
-        remove_symlink(asset_destination_dir)
         puts "Symlinking assets (stylesheets, etc)..."
         add_symlink asset_source_dir, asset_destination_dir
       end
