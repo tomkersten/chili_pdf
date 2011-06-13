@@ -1,3 +1,21 @@
+=== 0.3.0 / 2011-06-13
+
+* New features
+  * Added header/footer support [closes #2]
+  * Implemented 'footer_enabled' and 'header_enabled' settings to
+    control whether footers/headers are included [closes #3]
+  * Added 'dynamic' content which can be used to customize the
+    header/footer sections of exported PDFs (see TokenManager and
+    TokenString for details) [closes #4]
+
+* Minor enhancements:
+
+  * Added testing harness
+  * Updated layout to include any :header_tag content_for blocks
+  * PDF content was previously not being wrapped in PDF layout...fixed
+  * Threw in a fix for ul->li's showing numbers [closes #6]
+  * Added Formatter class which will be used for managing PDF formatting
+
 === 0.2.0 / 2011-05-23
 
 * Fixed layout & stylesheet inclusions
