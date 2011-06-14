@@ -6,14 +6,14 @@ class AssetURLConverterController < ApplicationController
     if full_file_path.blank?
       head :not_found
     else
-      render :text => full_file_path
+      render :text => "file://#{full_file_path}"
     end
   end
 
   private
     def full_file_path
       if requesting_valid_static_asset?
-        "file://#{requested_path}"
+        requested_path
       elsif requesting_attachment? && !attachment.blank?
         attachment.diskfile
       end

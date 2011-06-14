@@ -94,12 +94,9 @@ class AssetURLConverterControllerTest < ActionController::TestCase
 
         should "render the full (local) path to the file" do
           get :convert, :asset_url => @asset_url
-          assert_equal @local_path, @response.body
+          assert_equal "file://#{@local_path}", @response.body
         end
       end
-    end
-
-    context "requesting an attachment using a URI in the form of 'attachments/:id/:filename'" do
     end
   end
 end
