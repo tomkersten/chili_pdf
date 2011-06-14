@@ -35,7 +35,7 @@ class AssetURLConverterControllerTest < ActionController::TestCase
           css_path = File.join(Rails.root, 'public', 'stylesheets', 'application.css')
           get :convert, :asset_url => @asset_url
 
-          assert_equal css_path, @response.body
+          assert_equal "file://#{css_path}", @response.body
         end
       end
     end

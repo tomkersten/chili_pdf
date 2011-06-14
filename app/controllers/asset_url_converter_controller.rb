@@ -13,7 +13,7 @@ class AssetURLConverterController < ApplicationController
   private
     def full_file_path
       if requesting_valid_static_asset?
-        requested_path
+        "file://#{requested_path}"
       elsif requesting_attachment? && !attachment.blank?
         attachment.diskfile
       end
