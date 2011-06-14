@@ -14,7 +14,7 @@ class ExtendedWikiController < WikiController
 
   private
     def formatter
-      ChiliPDF::Formatter.new(filename, page_title)
+      ChiliPDF::Formatter.new(filename, page_title, wants_html_version?)
     end
 
     def filename
@@ -23,5 +23,9 @@ class ExtendedWikiController < WikiController
 
     def page_title
       "#{@project.name}, #{@page.title}"
+    end
+
+    def wants_html_version?
+      params[:as_html] == 'true'
     end
 end

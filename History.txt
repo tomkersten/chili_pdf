@@ -1,3 +1,10 @@
+=== NEXT
+
+* New features
+  * Added support for rending the HTML used to create the PDF by passing
+    "as_html=true" in as a URL param (eg: /Page.pdf?as_html=true)
+    [closes #9]
+
 === 0.3.0 / 2011-06-13
 
 * New features
