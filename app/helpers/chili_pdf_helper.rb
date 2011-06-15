@@ -7,4 +7,14 @@ module ChiliPdfHelper
       "<style type='text/css'>#{File.read(css_file)}</style>"
     }.join("\n")
   end
+
+  def update_img_src_tags_of(content, wants_html = false)
+    return content if wants_html
+
+    doc = ::Nokogiri::HTML(content)
+    doc.xpath('//img').each do |img_tag|
+      img_tag['src'] = TagMangler.new(img_tag['src']).to_local_src
+    end
+    doc.to_s
+  end
 end

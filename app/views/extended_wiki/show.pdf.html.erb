@@ -1,23 +1,13 @@
 <% content_for :header_tags do %>
   <%= chili_pdf_stylesheets %>
 
-  <%- if params[:as_html] == 'true' %>
+  <%- if @requesting_html_version %>
     <script src="/javascripts/prototype.js" type="text/javascript"></script>
   <%- else %>
     <script src="file://<%= File.join( Rails.root, 'public', 'javascripts', 'prototype.js') %>" type="text/javascript"></script>
   <%- end %>
-    <script>
-      document.observe("dom:loaded", function() {
-        var origin = new RegExp('^(' + window.location.origin + '/|/)');
-        $$('img').each(function(img) {
-          var src = $(img).readAttribute('src');
-          if(src.match(origin)){
-            var stripped = src.replace(origin, '');
-            console.log(stripped);
-          }
-        });
-      });
-    </script>
 <% end %>
 
-<%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
+<%- html_content = textilizable(@content.text, :attachments => @content.page.attachments) %>
+
+<%= update_img_src_tags_of(html_content, @requesting_html_version) %>

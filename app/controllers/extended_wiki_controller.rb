@@ -26,6 +26,6 @@ class ExtendedWikiController < WikiController
     end
 
     def wants_html_version?
-      params[:as_html] == 'true'
+      @requesting_html_version = params[:as_html] == 'true' || request.format.html?
     end
 end
