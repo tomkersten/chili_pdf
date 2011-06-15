@@ -1,4 +1,4 @@
-class AssetURLConverterController < ApplicationController
+class AssetUrlConverterController < ApplicationController
   unloadable
 
   # /asset_url_converter?asset=attachments/1

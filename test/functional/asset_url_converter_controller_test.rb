@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AssetURLConverterControllerTest < ActionController::TestCase
+class AssetUrlConverterControllerTest < ActionController::TestCase
   context "GET to #convert" do
     context "when requesting a static asset" do
       should "does not allow relative URLs which resolve to anything 'above' public on the filesystem" do
