@@ -1,3 +1,6 @@
+require 'wicked_pdf' unless defined?(WickedPdf)
+require 'nokogiri' unless defined?(Nokogiri)
+
 require 'chili_pdf/config'
 require 'chili_pdf/token_manager'
 require 'chili_pdf/formatter'

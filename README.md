@@ -55,6 +55,7 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
 ## REQUIREMENTS:
 
 * wicked\_pdf
+* nokogiri
 
 ## INSTALL:
 
