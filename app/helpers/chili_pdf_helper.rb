@@ -83,26 +83,6 @@ module ChiliPdfHelper
 
 
   private
-    # Updates the value of the 'src' attribute of any `tag_type` tags
-    # contained in `content` to be compatible with the `wkhtmltopdf`
-    # executable. If `wants_html` is falsey, no modifications are made
-    # to content.
-    #
-    # tag_type   - String-link object which returns the tag to look for in
-    #              'content' when #to_s is called on it.
-    # content    - String of the HTML content to search for `tag_type' in
-    # wants_html - whether to actually modify the source tags (added to
-    #              remove excessive/unnecessary boolean logic from view
-    #              templates)
-    def update_src_tag_of(tag_type, content, wants_html)
-      return content if wants_html
-      doc = ::Nokogiri::HTML(content)
-      doc.xpath("//#{tag_type.to_s}[@src]").each do |script_tag|
-        script_tag['src'] = TagMangler.new(script_tag['src']).to_local_src
-      end
-      doc.to_s
-    end
-
     # Generate list of default CSS link tags for the ChiliPDF plugin
     #
     # Returns String of <link>-tags for each file in the plugin's stylesheets
@@ -123,6 +103,27 @@ module ChiliPdfHelper
       tag_list(:js, PLUGIN_JS_DIR) {|filename|
         "<script src='/plugin_assets/chili_pdf/javascripts/#{filename}' type='text/javascript'></script>"
       }.join("\n")
+    end
+
+
+    # Updates the value of the 'src' attribute of any `tag_type` tags
+    # contained in `content` to be compatible with the `wkhtmltopdf`
+    # executable. If `wants_html` is falsey, no modifications are made
+    # to content.
+    #
+    # tag_type   - String-link object which returns the tag to look for in
+    #              'content' when #to_s is called on it.
+    # content    - String of the HTML content to search for `tag_type' in
+    # wants_html - whether to actually modify the source tags (added to
+    #              remove excessive/unnecessary boolean logic from view
+    #              templates)
+    def update_src_tag_of(tag_type, content, wants_html)
+      return content if wants_html
+      doc = ::Nokogiri::HTML(content)
+      doc.xpath("//#{tag_type.to_s}[@src]").each do |script_tag|
+        script_tag['src'] = TagMangler.new(script_tag['src']).to_local_src
+      end
+      doc.to_s
     end
 
 
