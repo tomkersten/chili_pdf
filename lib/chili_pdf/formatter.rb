@@ -15,9 +15,10 @@ module ChiliPDF
                        :description        => "The project & wiki page name (eg: 'My Project, Wiki Page Title')"}}
     end
 
-    def initialize(filename, title = nil)
+    def initialize(filename, title = nil, render_html_version = nil)
       @page_title = title
       @filename = filename
+      @allow_debugging = render_html_version
 
       # TODO: Hack...need to come up with better approach for this...
       TokenManager.add_token_definition do
@@ -31,6 +32,7 @@ module ChiliPDF
         :pdf => @filename,
         :template => view_template,
         :page_size => DEFAULT_PAGE_SIZE,
+        :show_as_html => render_as_html?,
         :margin => {
           :top    => DEFAULT_MARGIN,
           :bottom => DEFAULT_MARGIN,
@@ -75,6 +77,10 @@ module ChiliPDF
 
       def view_template
         DEFAULT_VIEW_TEMPLATE
+      end
+
+      def render_as_html?
+        !@allow_debugging.blank?
       end
   end
 end

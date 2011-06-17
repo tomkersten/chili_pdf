@@ -55,6 +55,7 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
 ## REQUIREMENTS:
 
 * wicked\_pdf
+* nokogiri
 
 ## INSTALL:
 
@@ -136,3 +137,7 @@ You can also drop me a message on Twitter [@tomkersten](http://twitter.com/tomke
 ## LICENSE:
 
 Refer to the [LICENSE](https://github.com/tomkersten/chili_pdf/blob/master/LICENSE) file
+
+## Contributors (sorted alphabetically)
+
+* Roy Kolak

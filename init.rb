@@ -1,6 +1,7 @@
 require 'redmine'
 require 'chili_pdf'
-require 'wicked_pdf'
+require 'wicked_pdf' unless defined?(WickedPdf)
+require 'nokogiri' unless defined?(Nokogiri)
 require 'dispatcher'
 
 Redmine::Plugin.register :chili_pdf do
