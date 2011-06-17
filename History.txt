@@ -1,9 +1,10 @@
 === NEXT
 
 * New features
+  * Added support for images in wiki pages to be exported in PDFs [closes #10]
+    (Thanks to @roykolak for the code review!)
   * Added support for rending the HTML used to create the PDF by passing
-    "as_html=true" in as a URL param (eg: /Page.pdf?as_html=true)
-    [closes #9]
+    "as_html=true" in as a URL param (eg: /Page.pdf?as_html=true) [closes #9]
   * Added nokogiri as a dependency to get around requests for protected
     assets (images, etc)
 
