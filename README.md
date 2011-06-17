@@ -39,6 +39,13 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
    any problems, but...just know that any other PDF exports you do are not a result
    of this gem. Issues, roadmaps, and Gantt charts will likely be coming if the
    wiki exports show promise.
+1. Exporting the "Start Page" of a wiki (the one that shows up when you click "Wiki")
+   is not implemented yet. An error will be thrown. You have to go to the specific
+   page that is rendered to export it.
+   ([issue #13](https://github.com/tomkersten/chili_pdf/issues/13))
+1. Deep-linking to a PDF URL fails due to some interaction with the
+   authentication/authorization system
+   ([issue #8](https://github.com/tomkersten/chili_pdf/issues/8))
 
 ## SYNOPSIS:
 
