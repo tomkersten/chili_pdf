@@ -1,0 +1,13 @@
+<p class="chili-pdf-instructions">
+  You can add custom CSS & JavaScript which will be applied to your PDF before saving.
+</p>
+
+<p>
+  <label><%= l(:label_custom_css) %></label>
+  <%= text_area_tag "settings[#{ChiliPDF::Config::CUSTOM_CSS_KEYNAME}]", ChiliPDF::Config.custom_css %>
+</p>
+
+<p>
+  <label><%= l(:label_custom_js) %></label>
+  <%= text_area_tag "settings[#{ChiliPDF::Config::CUSTOM_JS_KEYNAME}]", ChiliPDF::Config.custom_js %>
+</p>

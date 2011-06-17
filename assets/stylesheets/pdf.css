@@ -33,12 +33,3 @@ li { padding: 0.1em; }
 ol li {list-style-type: decimal;}
 ul li {list-style-type: disc;}
 h1, h2 {font-weight: bold;}
-
-#pdf-token-help {
-  margin-top: 20px;
-}
-
-#pdf-token-help table {width: 100%; border: 1px #AAA solid;}
-#pdf-token-help td {border-bottom: 1px dotted #CCC;}
-
-#pdf-token-help thead td {font-weight: bold; border-bottom: 2px solid #CCC;}
