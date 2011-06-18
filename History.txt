@@ -1,4 +1,4 @@
-=== NEXT
+=== 0.4.0 / 2011-06-18
 
 * New features:
   * Simplified customizating styles of of exported PDFs. Added ability to
@@ -9,7 +9,7 @@
   * Added support for rending the HTML used to create the PDF by passing
     "as_html=true" in as a URL param (eg: /Page.pdf?as_html=true) [closes #9]
   * Added nokogiri as a dependency to get around requests for protected
-    assets (images, etc)
+    assets (images, etc) (see issue #10 for details)
 
 * Minor enhancements:
   * Fixed image-sizing issue when resolution of image is wider than
