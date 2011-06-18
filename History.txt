@@ -1,6 +1,7 @@
 === NEXT
 
 * New features
+  * Exporting a project's "wiki start page" is supported now [closes #13]
   * Simplified customizating styles of of exported PDFs. Added ability to
     insert custom CSS and JavaScript into the DOM before the PDF is
     rendered [closes #12]
