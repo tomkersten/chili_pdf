@@ -1,6 +1,6 @@
 # ChiliPDF Plugin - Flexible PDF exporting for ChiliProject/Redmine
 
-* http://github.com/tomkersten/chili_pdf
+* http://github.com/tomkersten/chili\_pdf
 
 ## DESCRIPTION:
 
@@ -24,14 +24,16 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## FEATURES:
 
-1. Provides PDF export of any project wiki page to PDF with a baseline
-  stylesheet.
-1. The styling can be customized by adding your own CSS and/or JavaScript on the
+1. Provides PDF export of any project wiki page to PDF with a decent
+   baseline style out of the box.
+1. Support for dynamic content in headers and footers administered via the
    plugin configuration page.
+1. Flexible/easy PDF styling. The styling can be customized by adding your
+   own CSS and/or JavaScript on the plugin configuration page.
 
 ## SCREENSHOTS:
 
-You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626827940413/).
+You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626992576450).
 
 ## PROBLEMS:
 
@@ -40,9 +42,6 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
    any problems, but...just know that any other PDF exports you do are not a result
    of this gem. Issues, roadmaps, and Gantt charts will likely be coming if the
    wiki exports show promise.
-1. Deep-linking to a PDF URL fails due to some interaction with the
-   authentication/authorization system
-   ([issue #8](https://github.com/tomkersten/chili_pdf/issues/8))
 
 ## SYNOPSIS:
 
