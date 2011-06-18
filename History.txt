@@ -1,7 +1,6 @@
 === NEXT
 
-* New features
-  * Exporting a project's "wiki start page" is supported now [closes #13]
+* New features:
   * Simplified customizating styles of of exported PDFs. Added ability to
     insert custom CSS and JavaScript into the DOM before the PDF is
     rendered [closes #12]
@@ -11,6 +10,10 @@
     "as_html=true" in as a URL param (eg: /Page.pdf?as_html=true) [closes #9]
   * Added nokogiri as a dependency to get around requests for protected
     assets (images, etc)
+
+* Minor enhancements:
+  * Fixed image-sizing issue when resolution of image is wider than
+    the exported PDF [closes #11]
 
 === 0.3.0 / 2011-06-13
 
