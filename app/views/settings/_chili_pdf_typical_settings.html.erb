@@ -1,0 +1,76 @@
+<p class="chili-pdf-instructions">
+  <span class="tip-label">Pro Tip:</span>
+  You can see what impact your settings have on exported items by appending a
+  "<em>.pdf?as_html=true</em>" to the URL of any wiki page. This will give you an
+  idea of what your style/behavior changes will look like (without headers, margins,
+  et cetera).
+</p>
+
+<p>
+  <label for='settings_<%= ChiliPDF::Config::HEADER_ENABLED_KEYNAME %>'><%= l(:header_enabled_label) %></label>
+  <%= check_box_tag "settings[#{ChiliPDF::Config::HEADER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.header_enabled? %>
+</p>
+
+<p>
+  <label for='settings_<%= ChiliPDF::Config::FOOTER_ENABLED_KEYNAME %>'><%= l(:footer_enabled_label) %></label>
+  <%= check_box_tag "settings[#{ChiliPDF::Config::FOOTER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.footer_enabled? %>
+</p>
+
+<h3>Custom Header/Footer Content</h3>
+
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td>Left</td>
+      <td>Center</td>
+      <td>Right</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Header</td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_LEFT_KEYNAME}]", ChiliPDF::Config.header_values[:left] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_CENTER_KEYNAME}]", ChiliPDF::Config.header_values[:center] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_RIGHT_KEYNAME}]", ChiliPDF::Config.header_values[:right] %>
+      </td>
+    </tr>
+    <tr>
+      <td>Footer</td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_LEFT_KEYNAME}]", ChiliPDF::Config.footer_values[:left] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_CENTER_KEYNAME}]", ChiliPDF::Config.footer_values[:center] %>
+      </td>
+      <td>
+        <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_RIGHT_KEYNAME}]", ChiliPDF::Config.footer_values[:right] %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="pdf-token-help">
+  <h4>Dynamic text legend</h4>
+  <table>
+    <thead>
+      <tr>
+        <td>Enter this</td>
+        <td>...to show this</td>
+      </tr>
+    </thead>
+    <tbody>
+      <%- ChiliPDF::TokenManager.tokens.each do |token| %>
+        <tr>
+          <td class="token"><%= token.matcher_with_delimiters %></td>
+          <td class="description"><%= token.description %></td>
+        </tr>
+      <%- end %>
+    </tbody>
+  </table>
+</div>

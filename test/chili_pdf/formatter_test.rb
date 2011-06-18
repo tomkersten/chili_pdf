@@ -30,6 +30,23 @@ class FormatterTest < Test::Unit::TestCase
       assert_equal default_margins, @formatter.render_options[:margin]
     end
 
+    context "enabling/disabling viewing the underlying HTML of the PDF" do
+      should "set :show_as_html key to true when true is specified" do
+        formatter = Formatter.new('filename.pdf', 'title', true)
+        assert formatter.render_options[:show_as_html]
+      end
+
+      should "set :show_as_html key to false when false is specified" do
+        formatter = Formatter.new('filename.pdf', 'title', false)
+        assert !formatter.render_options[:show_as_html]
+      end
+
+      should "set :show_as_html key to false as the default" do
+        formatter = Formatter.new('filename.pdf', 'title')
+        assert !formatter.render_options[:show_as_html]
+      end
+    end
+
     context 'when footers are enabled' do
       setup do
         enable_footers

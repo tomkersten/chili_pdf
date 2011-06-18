@@ -1,0 +1,10 @@
+em {font-style: italic;}
+textarea {width: 600px; height: 200px;}
+
+p.chili-pdf-instructions {padding-left: 0;}
+.tip-label {font-weight: bold; text-decoration: underline;}
+
+#pdf-token-help {margin-top: 20px;}
+#pdf-token-help table {width: 100%; border: 1px #AAA solid;}
+#pdf-token-help td {border-bottom: 1px dotted #CCC;}
+#pdf-token-help thead td {font-weight: bold; border-bottom: 2px solid #CCC;}

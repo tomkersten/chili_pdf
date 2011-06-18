@@ -1,6 +1,6 @@
 # ChiliPDF Plugin - Flexible PDF exporting for ChiliProject/Redmine
 
-* http://github.com/tomkersten/chili_pdf
+* http://github.com/tomkersten/chili\_pdf
 
 ## DESCRIPTION:
 
@@ -24,13 +24,16 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
 
 ## FEATURES:
 
-1. Provides PDF export of any project wiki page to PDF with a baseline
-  stylesheet. The styling can be customized by modifying the "pdf.css'
-  asset file that ships with the library.
+1. Provides PDF export of any project wiki page to PDF with a decent
+   baseline style out of the box.
+1. Support for dynamic content in headers and footers administered via the
+   plugin configuration page.
+1. Flexible/easy PDF styling. The styling can be customized by adding your
+   own CSS and/or JavaScript on the plugin configuration page.
 
 ## SCREENSHOTS:
 
-You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626827940413/).
+You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626992576450).
 
 ## PROBLEMS:
 
@@ -55,6 +58,7 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
 ## REQUIREMENTS:
 
 * wicked\_pdf
+* nokogiri
 
 ## INSTALL:
 
@@ -136,3 +140,7 @@ You can also drop me a message on Twitter [@tomkersten](http://twitter.com/tomke
 ## LICENSE:
 
 Refer to the [LICENSE](https://github.com/tomkersten/chili_pdf/blob/master/LICENSE) file
+
+## Contributors (sorted alphabetically)
+
+* Roy Kolak

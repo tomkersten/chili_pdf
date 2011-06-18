@@ -7,6 +7,8 @@ module ChiliPDF
     DISABLED_VALUE = '0'
     FOOTER_ENABLED_KEYNAME = 'footer_enabled'
     HEADER_ENABLED_KEYNAME = 'header_enabled'
+    CUSTOM_CSS_KEYNAME      = 'custom_css'
+    CUSTOM_JS_KEYNAME       = 'custom_javascript'
 
     HEADER_LEFT_KEYNAME   = :header_content_left
     HEADER_CENTER_KEYNAME = :header_content_center
@@ -21,6 +23,25 @@ module ChiliPDF
     FOOTER_LEFT_DEFAULT_VALUE   = '{{datestamp}}'
     FOOTER_CENTER_DEFAULT_VALUE = ''
     FOOTER_RIGHT_DEFAULT_VALUE  = '{{current_page}}/{{total_pages}}'
+    CUSTOM_CSS_DEFAULT_VALUE    = <<END_OF_CSS_DEF
+<!-- stylesheet link example, uncomment & modify if you like -->
+<!-- <link href='/stylesheets/your_custom.css' rel='stylesheet' type='text/css' />
+
+<!-- inline example -->
+<style type="text/css">
+  //#custom-pdf-styles h2 {color: red;}
+</style>
+END_OF_CSS_DEF
+
+    CUSTOM_JS_DEFAULT_VALUE     = <<END_OF_JS_DEF
+<!-- Script tag link example. Uncomment & modify if you like.  -->
+<!-- <script src='/javascripts/your_custom.js' type='text/javascript' />
+
+<!-- Inline JavaScript example -->
+<script type="text/javascript">
+  // Your custom-inline JS here
+</script>
+END_OF_JS_DEF
 
     def defaults
       {
@@ -31,7 +52,9 @@ module ChiliPDF
         HEADER_RIGHT_KEYNAME   => HEADER_RIGHT_DEFAULT_VALUE,
         FOOTER_LEFT_KEYNAME    => FOOTER_LEFT_DEFAULT_VALUE,
         FOOTER_CENTER_KEYNAME  => FOOTER_CENTER_DEFAULT_VALUE,
-        FOOTER_RIGHT_KEYNAME   => FOOTER_RIGHT_DEFAULT_VALUE
+        FOOTER_RIGHT_KEYNAME   => FOOTER_RIGHT_DEFAULT_VALUE,
+        CUSTOM_CSS_KEYNAME     => CUSTOM_CSS_DEFAULT_VALUE,
+        CUSTOM_JS_KEYNAME      => CUSTOM_JS_DEFAULT_VALUE
       }
     end
 
@@ -70,6 +93,22 @@ module ChiliPDF
 
     def footer_values
       default_footer_values.merge(stored_footer_settings)
+    end
+
+    def custom_css
+      if plugin_settings[CUSTOM_CSS_KEYNAME].blank?
+        CUSTOM_CSS_DEFAULT_VALUE
+      else
+        plugin_settings[CUSTOM_CSS_KEYNAME]
+      end
+    end
+
+    def custom_js
+      if plugin_settings[CUSTOM_JS_KEYNAME].blank?
+        CUSTOM_JS_DEFAULT_VALUE
+      else
+        plugin_settings[CUSTOM_JS_KEYNAME]
+      end
     end
 
     private
