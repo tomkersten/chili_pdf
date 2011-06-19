@@ -1,6 +1,6 @@
 # ChiliPDF Plugin - Flexible PDF exporting for ChiliProject/Redmine
 
-* http://github.com/tomkersten/chili\_pdf
+* http://github.com/tomkersten/chili_pdf
 
 ## DESCRIPTION:
 
