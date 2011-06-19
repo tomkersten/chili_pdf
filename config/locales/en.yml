@@ -9,3 +9,14 @@ en:
   label_custom_css: Custom CSS
   label_custom_js: Custom JavaScript
   label_logo_url: Logo URL
+  section_heading_dynamic_text_legend: Dynamic text legend
+  section_heading_custom_header_footer_content: Custom Header/Footer Content
+  table_header_footer_labels_left: Left
+  table_header_footer_labels_center: Center
+  table_header_footer_labels_right: Right
+  table_header_footer_labels_header: Header
+  table_header_footer_labels_footer: Footer
+  table_dyanmic_header_enter_this: Enter this
+  table_dyanmic_header_to_show_this: to show this
+  tip_label: Pro Tip
+  tip_view_as_html: You can see what impact your settings have on exported items by appending a "<em>.pdf?as_html=true</em>" to the URL of any wiki page. This will give you an idea of what your style/behavior changes will look like (without headers, margins, et cetera).
