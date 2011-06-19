@@ -6,3 +6,8 @@ have uploaded to this site, or any public URL.
   <label for='settings_<%= ChiliPDF::Config::LOGO_KEYNAME%>'><%= l(:label_logo_url) %></label>
   <%= text_field_tag "settings[#{ChiliPDF::Config::LOGO_KEYNAME}]", ChiliPDF::Config.logo_url, :class => 'url' %>
 </p>
+
+<%- if ChiliPDF::Config.logo_url? %>
+  <h4>Current logo</h4>
+  <%= image_tag ChiliPDF::Config.logo_url %>
+<%- end %>
