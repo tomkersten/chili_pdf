@@ -34,3 +34,8 @@ ol li {list-style-type: decimal;}
 ul li {list-style-type: disc;}
 h1, h2 {font-weight: bold;}
 img {max-width: 100%;}
+
+#chili-pdf-logo {
+  max-height: 50px;
+  float:right;
+}

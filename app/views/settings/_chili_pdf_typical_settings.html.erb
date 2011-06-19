@@ -7,18 +7,18 @@
 </p>
 
 <p>
-  <label for='settings_<%= ChiliPDF::Config::HEADER_ENABLED_KEYNAME %>'><%= l(:header_enabled_label) %></label>
+  <label for='settings_<%= ChiliPDF::Config::HEADER_ENABLED_KEYNAME %>'><%= l(:label_header_enabled) %></label>
   <%= check_box_tag "settings[#{ChiliPDF::Config::HEADER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.header_enabled? %>
 </p>
 
 <p>
-  <label for='settings_<%= ChiliPDF::Config::FOOTER_ENABLED_KEYNAME %>'><%= l(:footer_enabled_label) %></label>
+  <label for='settings_<%= ChiliPDF::Config::FOOTER_ENABLED_KEYNAME %>'><%= l(:label_footer_enabled) %></label>
   <%= check_box_tag "settings[#{ChiliPDF::Config::FOOTER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.footer_enabled? %>
 </p>
 
 <h3>Custom Header/Footer Content</h3>
 
-<table>
+<table id="header-footer-settings">
   <thead>
     <tr>
       <td></td>

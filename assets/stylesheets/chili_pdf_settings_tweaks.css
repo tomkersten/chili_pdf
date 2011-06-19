@@ -3,6 +3,11 @@ textarea {width: 600px; height: 200px;}
 
 p.chili-pdf-instructions {padding-left: 0;}
 .tip-label {font-weight: bold; text-decoration: underline;}
+.url {width: 600px;}
+
+#header-footer-settings input {
+  width: 300px;
+}
 
 #pdf-token-help {margin-top: 20px;}
 #pdf-token-help table {width: 100%; border: 1px #AAA solid;}

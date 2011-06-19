@@ -98,4 +98,26 @@ class ChiliPdfHelperTest < HelperTestCase
       end
     end
   end
+
+  context "#logo_img_tag" do
+    context "when no logo URL is defined for the plugin" do
+      setup do
+        ChiliPDF::Config.stubs(:logo_url).returns("")
+      end
+
+      should "return nil" do
+        assert_nil logo_img_tag(true)
+      end
+    end
+
+    context "when a logo URL is defined" do
+      setup do
+        ChiliPDF::Config.stubs(:logo_url).returns("/images/cancel.png")
+      end
+
+      should "return an '<img>' tag with an 'id' of 'chili-pdf-logo'" do
+        assert_match /id="chili-pdf-logo"/, logo_img_tag(true)
+      end
+    end
+  end
 end

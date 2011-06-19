@@ -1,3 +1,10 @@
+=== NEXT
+
+* New features:
+  * 'Logo' support. Admins can add the URL of an image on the plugin
+    configuration page. The logo will show up on the top-right corner
+    of the first page of all exported PDFs. [closes #15]
+
 === 0.4.0 / 2011-06-18
 
 * New features:

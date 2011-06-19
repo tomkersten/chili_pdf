@@ -1,0 +1,8 @@
+<p class="chili-pdf-instructions">
+Enter the URL of an image you would like to appear on the first
+page of all exported PDFs. You can enter a URL of a file you
+have uploaded to this site, or any public URL.
+<p>
+  <label for='settings_<%= ChiliPDF::Config::LOGO_KEYNAME%>'><%= l(:label_logo_url) %></label>
+  <%= text_field_tag "settings[#{ChiliPDF::Config::LOGO_KEYNAME}]", ChiliPDF::Config.logo_url, :class => 'url' %>
+</p>
