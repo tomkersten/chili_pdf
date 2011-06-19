@@ -1,35 +1,32 @@
 <p class="chili-pdf-instructions">
-  <span class="tip-label">Pro Tip:</span>
-  You can see what impact your settings have on exported items by appending a
-  "<em>.pdf?as_html=true</em>" to the URL of any wiki page. This will give you an
-  idea of what your style/behavior changes will look like (without headers, margins,
-  et cetera).
+  <span class="tip-label"><%= l(:tip_label) %>:</span>
+  <%= l(:tip_view_as_html) %>
 </p>
 
 <p>
-  <label for='settings_<%= ChiliPDF::Config::HEADER_ENABLED_KEYNAME %>'><%= l(:header_enabled_label) %></label>
+  <label for='settings_<%= ChiliPDF::Config::HEADER_ENABLED_KEYNAME %>'><%= l(:label_header_enabled) %></label>
   <%= check_box_tag "settings[#{ChiliPDF::Config::HEADER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.header_enabled? %>
 </p>
 
 <p>
-  <label for='settings_<%= ChiliPDF::Config::FOOTER_ENABLED_KEYNAME %>'><%= l(:footer_enabled_label) %></label>
+  <label for='settings_<%= ChiliPDF::Config::FOOTER_ENABLED_KEYNAME %>'><%= l(:label_footer_enabled) %></label>
   <%= check_box_tag "settings[#{ChiliPDF::Config::FOOTER_ENABLED_KEYNAME}]", ChiliPDF::Config::ENABLED_VALUE, ChiliPDF::Config.footer_enabled? %>
 </p>
 
-<h3>Custom Header/Footer Content</h3>
+<h3><%= l(:section_heading_custom_header_footer_content) %></h3>
 
-<table>
+<table id="header-footer-settings">
   <thead>
     <tr>
       <td></td>
-      <td>Left</td>
-      <td>Center</td>
-      <td>Right</td>
+      <td><%= l(:table_header_footer_labels_left) %></td>
+      <td><%= l(:table_header_footer_labels_center) %></td>
+      <td><%= l(:table_header_footer_labels_right) %></td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Header</td>
+      <td><%= l(:table_header_footer_labels_header) %></td>
       <td>
         <%= text_field_tag "settings[#{ChiliPDF::Config::HEADER_LEFT_KEYNAME}]", ChiliPDF::Config.header_values[:left] %>
       </td>
@@ -41,7 +38,7 @@
       </td>
     </tr>
     <tr>
-      <td>Footer</td>
+      <td><%= l(:table_header_footer_labels_footer) %></td>
       <td>
         <%= text_field_tag "settings[#{ChiliPDF::Config::FOOTER_LEFT_KEYNAME}]", ChiliPDF::Config.footer_values[:left] %>
       </td>
@@ -56,12 +53,12 @@
 </table>
 
 <div id="pdf-token-help">
-  <h4>Dynamic text legend</h4>
+  <h4><%= l(:section_heading_dynamic_text_legend) %></h4>
   <table>
     <thead>
       <tr>
-        <td>Enter this</td>
-        <td>...to show this</td>
+        <td><%= l(:table_dyanmic_header_enter_this) %></td>
+        <td>...<%= l(:table_dyanmic_header_to_show_this) %></td>
       </tr>
     </thead>
     <tbody>

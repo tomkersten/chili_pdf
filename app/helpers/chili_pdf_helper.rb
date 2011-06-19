@@ -94,6 +94,24 @@ module ChiliPdfHelper
   end
 
 
+  # Public: Generates an image tag with the appropriate mark-up for the ChiliPDF
+  #         'logo'.
+  #
+  # wants_html - specifies whether the 'src' attribute should be formatted
+  #              for HTML or PDF requests (local vs. relative paths). Added to
+  #              keep excessive boolean logic out of views.
+  #
+  # Returns an '<img>' tag for your view template with a properly formatted 'src'
+  #         attribute, depending on whether the user is requesting an HTML or PDF
+  #         format. If no logo is defined in the plugin configuration, nothing is
+  #         rendered in the view tempalate.
+  def logo_img_tag(wants_html)
+    if ChiliPDF::Config.logo_url?
+      img_tag = image_tag(ChiliPDF::Config.logo_url, :id => "chili-pdf-logo")
+      update_img_src_tags_of(img_tag, wants_html)
+    end
+  end
+
   private
     # Updates the value of the specified attribute of any `tag_type` tags
     # contained in `content` to be compatible with the `wkhtmltopdf`

@@ -5,5 +5,7 @@
   <%= normalize_custom_js_src_tags_in(ChiliPDF::Config.custom_js, @requesting_html_version) %>
 <% end %>
 
+<%= logo_img_tag(@requesting_html_version) %>
+
 <%- html_content = textilizable(@content.text, :attachments => @content.page.attachments) %>
 <%= update_img_src_tags_of(html_content, @requesting_html_version) %>

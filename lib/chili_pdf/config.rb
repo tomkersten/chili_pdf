@@ -16,6 +16,7 @@ module ChiliPDF
     FOOTER_LEFT_KEYNAME   = :footer_content_left
     FOOTER_CENTER_KEYNAME = :footer_content_center
     FOOTER_RIGHT_KEYNAME  = :footer_content_right
+    LOGO_KEYNAME          = :watermarks_logo
 
     HEADER_LEFT_DEFAULT_VALUE   = '{{page_title}}'
     HEADER_CENTER_DEFAULT_VALUE = ''
@@ -54,7 +55,8 @@ END_OF_JS_DEF
         FOOTER_CENTER_KEYNAME  => FOOTER_CENTER_DEFAULT_VALUE,
         FOOTER_RIGHT_KEYNAME   => FOOTER_RIGHT_DEFAULT_VALUE,
         CUSTOM_CSS_KEYNAME     => CUSTOM_CSS_DEFAULT_VALUE,
-        CUSTOM_JS_KEYNAME      => CUSTOM_JS_DEFAULT_VALUE
+        CUSTOM_JS_KEYNAME      => CUSTOM_JS_DEFAULT_VALUE,
+        LOGO_KEYNAME           => ''
       }
     end
 
@@ -109,6 +111,14 @@ END_OF_JS_DEF
       else
         plugin_settings[CUSTOM_JS_KEYNAME]
       end
+    end
+
+    def logo_url
+      plugin_settings[LOGO_KEYNAME]
+    end
+
+    def logo_url?
+      !logo_url.blank?
     end
 
     private

@@ -1,6 +1,6 @@
 # ChiliPDF Plugin - Flexible PDF exporting for ChiliProject/Redmine
 
-* http://github.com/tomkersten/chili\_pdf
+* http://github.com/tomkersten/chili_pdf
 
 ## DESCRIPTION:
 
@@ -30,10 +30,13 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
    plugin configuration page.
 1. Flexible/easy PDF styling. The styling can be customized by adding your
    own CSS and/or JavaScript on the plugin configuration page.
+1. Custom logo support. You can specify the URL of an image to place in the
+   top-right corner of the first page of all exported PDFs.
 
 ## SCREENSHOTS:
 
-You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626992576450).
+You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/tags/chilipdf/).
+(Release-specific screenshots are in [sets named 'chili_pdf,...'](http://www.flickr.com/photos/tomkersten/sets/)).
 
 ## PROBLEMS:
 
@@ -51,7 +54,7 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
 1. Cycle your application servers (Mongrel, unicorn, Passenger, etc)
 1. Visit any wiki page and manually add a '.pdf' extension to the URL
    1. **NOTE:** You must be on an individual wiki page. Manually adding
-      the '.pdf' on the 'default wiki page' URL (/projects/:project_id/wiki)
+      the '.pdf' on the 'default wiki page' URL (http://yoursite.com/projects/:project_id/wiki)
       will not work correctly at this time. The manual step will be removed
       in a future release.
 
@@ -110,7 +113,7 @@ config.gem 'chili_pdf'
 
 Cycle your application server (mongrel, unicorn, whatevs)...
 
-Then, uninstall the chili_pdf gem:
+Then, uninstall the gem:
 
 ```
 gem uninstall chili_pdf
