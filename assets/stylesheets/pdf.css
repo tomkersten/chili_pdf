@@ -34,8 +34,23 @@ ol li {list-style-type: decimal;}
 ul li {list-style-type: disc;}
 h1, h2 {font-weight: bold;}
 img {max-width: 100%;}
+img {border:1px solid #888;}
+#chili-pdf-logo {max-height:50px; float:right; border:none;}
 
-#chili-pdf-logo {
-  max-height: 50px;
-  float:right;
+pre {
+  // found at http://www.longren.org/wrapping-text-inside-pre-tags/
+  overflow: auto;
+  font-family: ?Consolas?,monospace;
+  font-size: 9pt;
+  text-align:left;
+  background-color: #FCF7EC;
+  overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  margin: 0px 0px 0px 0px;
+  padding:5px 5px 3px 5px;
+  white-space : normal; /* crucial for IE 6, maybe 7? */
+  padding:10px; background:#DDD;
+  margin:5px 0;
 }
