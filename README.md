@@ -51,7 +51,7 @@ You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/se
 1. Cycle your application servers (Mongrel, unicorn, Passenger, etc)
 1. Visit any wiki page and manually add a '.pdf' extension to the URL
    1. **NOTE:** You must be on an individual wiki page. Manually adding
-      the '.pdf' on the 'default wiki page' URL (/projects/:project_id/wiki)
+      the '.pdf' on the 'default wiki page' URL (http://yoursite.com/projects/:project_id/wiki)
       will not work correctly at this time. The manual step will be removed
       in a future release.
 
@@ -110,7 +110,7 @@ config.gem 'chili_pdf'
 
 Cycle your application server (mongrel, unicorn, whatevs)...
 
-Then, uninstall the chili_pdf gem:
+Then, uninstall the gem:
 
 ```
 gem uninstall chili_pdf
