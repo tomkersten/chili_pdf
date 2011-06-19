@@ -13,6 +13,7 @@ app/views/layouts/pdf.pdf.erb
 app/views/settings/_chili_pdf_advanced_settings.html.erb
 app/views/settings/_chili_pdf_settings.html.erb
 app/views/settings/_chili_pdf_typical_settings.html.erb
+app/views/settings/_chili_pdf_watermark_settings.html.erb
 assets/javascripts/chili_pdf.js
 assets/stylesheets/chili_pdf_settings_tweaks.css
 assets/stylesheets/pdf.css

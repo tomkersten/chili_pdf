@@ -30,10 +30,13 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
    plugin configuration page.
 1. Flexible/easy PDF styling. The styling can be customized by adding your
    own CSS and/or JavaScript on the plugin configuration page.
+1. Custom logo support. You can specify the URL of an image to place in the
+   top-right corner of the first page of all exported PDFs.
 
 ## SCREENSHOTS:
 
-You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/sets/72157626992576450).
+You can find a few screenshots [here](http://www.flickr.com/photos/tomkersten/tags/chilipdf/).
+(Release-specific screenshots are in [sets named 'chili_pdf,...'](http://www.flickr.com/photos/tomkersten/sets/)).
 
 ## PROBLEMS:
 
