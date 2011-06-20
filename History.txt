@@ -1,3 +1,9 @@
+=== 0.4.3 / 2011-06-20
+
+* Bugfix:
+  * Yanked 0.4.2 release...this release fixes a mistake tests did not
+    catch...no features other than that on top of 0.4.2
+
 === 0.4.2 / 2011-06-20
 
 * Minor enhancements:
