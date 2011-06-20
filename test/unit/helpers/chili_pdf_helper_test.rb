@@ -3,6 +3,14 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class ChiliPdfHelperTest < HelperTestCase
   include ChiliPdfHelper
 
+  def root_url
+    "http://example.com/"
+  end
+
+  def request
+    @request ||= ActionController::TestRequest.new
+  end
+
   context "#chili_pdf_stylesheets" do
     should "include the pdf.css stylesheet" do
       assert_match %r(<link.*href=['"].*pdf\.css['"].*>), chili_pdf_stylesheets(false)

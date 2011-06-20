@@ -9,5 +9,5 @@ have uploaded to this site, or any public URL.
 
 <%- if ChiliPDF::Config.logo_url? %>
   <h4>Current logo</h4>
-  <%= image_tag ChiliPDF::Config.logo_url %>
+  <%= image_tag ChiliPDF::Config.logo_url, :id => 'chili-pdf-logo' %>
 <%- end %>

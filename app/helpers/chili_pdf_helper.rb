@@ -112,6 +112,35 @@ module ChiliPdfHelper
     end
   end
 
+  # Public: Converts 'href' attributes of any <a> tags to be compatible with
+  #         the `wkhtmltopdf` executable requirements (to absolute URLs).
+  #         Capable of handling URLs to both other domains and relative URLS.
+  #
+  # content    - the String of HTML content to normalize/update
+  #
+  # Returns content un-modified if wants_html is true. Otherwise returns
+  #         the content string with the modified 'href' attribute on all
+  #         <a>-tags in content.
+  def update_a_hrefs(content)
+    update_tag_attribute(:a, :href, content, false, :absolute_url)
+  end
+
+  # Public: Converts 'href' attributes of any <a> tags  and any 'src' attributes
+  #         of <img> tags contained in 'content' to be compatible with
+  #         the `wkhtmltopdf` executable (to absolute & 'file://-based' URLs).
+  #
+  # content    - the String of HTML content to normalize/update
+  # wants_html - specifies whether the attribute should be formatted
+  #              for HTML or PDF requests (local vs. relative paths). Added to
+  #              keep excessive boolean logic out of views.
+  #
+  # Returns content un-modified if wants_html is true. Otherwise returns
+  #         the content string with the modified 'href' attribute on all
+  #         <a>-tags in content.
+  def update_link_and_image_urls(content, wants_html)
+    update_a_hrefs(update_img_src_tags_of(content, wants_html))
+  end
+
   private
     # Updates the value of the specified attribute of any `tag_type` tags
     # contained in `content` to be compatible with the `wkhtmltopdf`
@@ -124,7 +153,7 @@ module ChiliPdfHelper
     # wants_html - specifies whether the attribute should be formatted
     #              for HTML or PDF requests (local vs. relative paths). Added to
     #              keep excessive boolean logic out of views.
-    def update_tag_attribute(tag_type, attribute, content, wants_html)
+    def update_tag_attribute(tag_type, attribute, content, wants_html, url_type = :file)
       return content if wants_html
 
       doc = ::Nokogiri::HTML(content)
@@ -148,8 +177,7 @@ module ChiliPdfHelper
     # wants_html - specifies whether the 'src' attribute should be formatted
     #              for HTML or PDF requests (local vs. relative paths). Added to
     #              keep excessive boolean logic out of views.
-    # &block     - code to execute on each matching filename (filename is
-    #              passed in as a parameter to &block)
+    #
     # Returns an Array of the results of the &block executions.
     def file_type_list(file_ext, src_dir, wants_html, &block)
       # We want/need to prepend the Prototype script-tag before all other script-tags
@@ -164,9 +192,13 @@ module ChiliPdfHelper
 
     # Converts the specified String to PDF-format-friendly version of itself.
     # Supports the '/attachments/:id/:filename' and '/attachments/download/:id' routes
-    # of ChiliProject as well as standard static assets (nested under RAILS_ROOT/public).
+    # of ChiliProject as well as standard static assets (nested under RAILS_ROOT/public),
+    # and URLs (relative & absolute).
     #
-    # content - String to convert
+    # content  - String to convert
+    # url_type - symbol of the type of url to convert (default: :file)
+    #            :file         - process as a local-file URL, if valid
+    #            :absolute_url - process as if the content were a web URL
     #
     # Examples
     #
@@ -177,9 +209,14 @@ module ChiliPdfHelper
     #   => "file:///path/to/rails_root/files/38278327_image.png"
     #
     # Returns modified String, unless requested asset either doesn't exist
-    #   or is an invalid request (to, say, an asset located above
-    #   the 'RAILS_ROOT/public' sub-directory.
-    def mangle(content)
-      TagMangler.new(content).to_local_src
+    #   or is an invalid request (eg: an asset located above the 'RAILS_ROOT/public'
+    #   sub-directory).
+    def mangle(content, url_type = :file)
+      case url_type
+      when :file then TagMangler.new(content).to_local_src
+      when :absolute_url then TagMangler.new(content, request).to_absolute_url
+      else
+        raise ArgumentError, "invalid url_type passed to #mangle (received: #{url_type.inspect})"
+      end
     end
 end

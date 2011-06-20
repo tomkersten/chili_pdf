@@ -1,19 +1,50 @@
 class TagMangler
-  def initialize(src)
-    @src_attribute = src
+  def initialize(src, request_like_object = nil)
+    @src_attribute = src # /roy
+    @request_like = request_like_object
   end
 
   def to_local_src
     full_file_path.blank? ? @src_attribute : "file://#{full_file_path}"
   end
 
+  def to_absolute_url
+     if relative_url?
+       "#{base_url}#{relative_url}"
+     elsif anchor_tag
+       "#{@request_like.url}#{anchor_tag}"
+     else
+       @src_attribute
+     end
+  end
+
   private
+    def base_url
+      @request_like.url.sub(@request_like.request_uri, '/')
+    end
+
     def full_file_path
       if requesting_valid_static_asset?
         requested_path
       elsif requesting_attachment? && !attachment.blank?
         attachment.diskfile
       end
+    end
+
+    def anchor_tag
+      @src_attribute[%r!^(#.*)!]
+    end
+
+    def anchor_tag?
+      !anchor_tag.blank
+    end
+
+    def relative_url
+      @src_attribute.match(%r!^/(.*)!) && $1
+    end
+
+    def relative_url?
+      !relative_url.blank?
     end
 
     def attachment

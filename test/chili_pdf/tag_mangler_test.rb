@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-def make_mangler_with(asset_path)
-  TagMangler.new(asset_path)
+def make_mangler_with(asset_path, request_like = nil)
+  TagMangler.new(asset_path, request_like)
 end
 
 # Stolen from the Rails.root test_helper...
@@ -109,6 +109,56 @@ class TokenManagerTest < Test::Unit::TestCase
         should "render the full (local) path to the file" do
           assert_equal "file://#{@local_path}", @mangler.to_local_src
         end
+      end
+    end
+  end
+
+  context "#to_absolute_url" do
+    context "when the content passed in has a link to another domain" do
+      setup do
+        @requested_asset = "http://someotherhost.com/page.html"
+        @mangler = make_mangler_with(@requested_asset)
+      end
+
+      should "not be modified" do
+        assert_equal @requested_asset, @mangler.to_absolute_url
+      end
+    end
+
+    context "when the content passed in has a relative link" do
+      setup do
+        @base_url = "http://example.com"
+        @requested_asset = "/page"
+        @absolute_url = "#{@base_url}#{@requested_asset}"
+
+        mock_request = 'Mocked Request'
+        mock_request.stubs(:url).returns(@absolute_url)
+        mock_request.stubs(:request_uri).returns(@requested_asset)
+
+        @mangler = make_mangler_with(@requested_asset, mock_request)
+      end
+
+      should "should return an absolute URL to the original page" do
+        assert_equal @absolute_url, @mangler.to_absolute_url
+      end
+    end
+
+    context "when the content passed in has an anchor to another location in the current page" do
+      setup do
+        @base_url = "http://example.com"
+        @current_page = "/current_page"
+        @absolute_url = "#{@base_url}#{@current_page}"
+
+        mock_request = 'Mocked Request'
+        mock_request.stubs(:request_uri).returns(@current_page)
+        mock_request.stubs(:url).returns(@absolute_url)
+
+        @requested_asset = "#HeadingOnPage"
+        @mangler = make_mangler_with(@requested_asset, mock_request)
+      end
+
+      should "should return an absolute URL to the original page" do
+        assert_equal "#{@absolute_url}#{@requested_asset}", @mangler.to_absolute_url
       end
     end
   end
