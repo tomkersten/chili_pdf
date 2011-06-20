@@ -112,6 +112,22 @@ module ChiliPdfHelper
     end
   end
 
+  def update_a_hrefs_of(content)
+    update_tag_attribute(:a, :href, content, false) do |attribute_value|
+      if attribute_value[%r!^/(.*)!]
+        "#{root_url}#{$1}"
+      elsif attribute_value[%r!^(#.*)!]
+        "#{request.url}#{$1}"
+      else
+        attribute_value
+      end
+    end
+  end
+
+  def update_link_and_image_urls(content, wants_html)
+    update_a_hrefs_of(update_img_src_tags_of(content, wants_html))
+  end
+
   private
     # Updates the value of the specified attribute of any `tag_type` tags
     # contained in `content` to be compatible with the `wkhtmltopdf`
@@ -124,12 +140,16 @@ module ChiliPdfHelper
     # wants_html - specifies whether the attribute should be formatted
     #              for HTML or PDF requests (local vs. relative paths). Added to
     #              keep excessive boolean logic out of views.
-    def update_tag_attribute(tag_type, attribute, content, wants_html)
+    def update_tag_attribute(tag_type, attribute, content, wants_html, &block)
       return content if wants_html
 
       doc = ::Nokogiri::HTML(content)
       doc.xpath("//#{tag_type.to_s}[@#{attribute.to_s}]").each do |a_tag|
-        a_tag["#{attribute.to_s}"] = mangle(a_tag["#{attribute.to_s}"])
+        if block_given?
+          a_tag["#{attribute.to_s}"] = yield a_tag["#{attribute.to_s}"]
+        else
+          a_tag["#{attribute.to_s}"] = mangle(a_tag["#{attribute.to_s}"])
+        end
       end
       doc.to_s
     end
