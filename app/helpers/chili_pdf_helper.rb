@@ -158,7 +158,7 @@ module ChiliPdfHelper
 
       doc = ::Nokogiri::HTML(content)
       doc.xpath("//#{tag_type.to_s}[@#{attribute.to_s}]").each do |a_tag|
-        a_tag["#{attribute.to_s}"] = mangle(a_tag["#{attribute.to_s}"])
+        a_tag["#{attribute.to_s}"] = mangle(a_tag["#{attribute.to_s}"], url_type)
       end
       doc.to_s
     end
