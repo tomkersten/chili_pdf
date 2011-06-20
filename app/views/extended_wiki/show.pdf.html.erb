@@ -8,4 +8,4 @@
 <%= logo_img_tag(@requesting_html_version) %>
 
 <%- html_content = textilizable(@content.text, :attachments => @content.page.attachments) %>
-<%= update_img_src_tags_of(html_content, @requesting_html_version) %>
+<%= update_link_and_image_urls(html_content, @requesting_html_version) %>

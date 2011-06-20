@@ -13,3 +13,5 @@ p.chili-pdf-instructions {padding-left: 0;}
 #pdf-token-help table {width: 100%; border: 1px #AAA solid;}
 #pdf-token-help td {border-bottom: 1px dotted #CCC;}
 #pdf-token-help thead td {font-weight: bold; border-bottom: 2px solid #CCC;}
+
+#chili-pdf-logo {max-height:50px; border:none;}
