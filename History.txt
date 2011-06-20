@@ -1,3 +1,15 @@
+=== 0.4.2 / 2011-06-20
+
+* Minor enhancements:
+  * Updates added style for logo image in plugin settings to reflect
+    the size it will render as within a PDF.
+
+* Bugfix:
+  * Fixed the issue with relative links not working. All links will point
+    to URLs for the time-being (vs in-document chapter links), as the
+    anchor-tag-to-chapter-link conversion doesn't seem to be working for
+    some reason.  [closes #16]
+
 === 0.4.1 / 2011-06-19
 
 * New features:

@@ -128,43 +128,4 @@ class ChiliPdfHelperTest < HelperTestCase
       end
     end
   end
-
-  context "#update_a_hrefs_of" do
-    context "when the content passed in has a link to another domain" do
-      setup do
-        @tag = '<a href="http://someotherhost.com/page.html">Link</a>'
-      end
-
-      should "should not be modified" do
-        assert_match /#{@tag}/, update_a_hrefs_of(@tag).to_s
-      end
-    end
-
-    context "when the content passed in has a relative link" do
-      setup do
-        @relative_url = "/page"
-        @tag = "<a href=\"#{@relative_url}\">Link</a>"
-      end
-
-      should "should return an absolute URL to the original page" do
-        expected = "<a href=\"http://example.com#{@relative_url}\">Link</a>"
-        assert_match /#{expected}/, update_a_hrefs_of(@tag).to_s
-      end
-    end
-
-    context "when the content passed in has an anchor to another location in the current page" do
-      setup do
-        @relative_url = "#HeadingOnPage"
-        @tag = "<a href=\"#{@relative_url}\">Link</a>"
-        @current_action = "current_page"
-        @request.stubs(:action).returns(@current_action)
-        @request.stubs(:url).returns("http://example.com/#{@current_action}")
-      end
-
-      should "should return an absolute URL to the original page" do
-        expected = "<a href=\"http://example.com/#{@current_action}#{@relative_url}\">Link</a>"
-        assert_match /#{expected}/, update_a_hrefs_of(@tag).to_s
-      end
-    end
-  end
 end
