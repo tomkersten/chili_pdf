@@ -15,12 +15,18 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
    server. Technically this is a dependency of the library being used to
    generate the PDFs ([wicked_pdf](https://github.com/mileszs/wicked_pdf)),
    but, it's something you should be aware of.
-1. Requires a patch to the Redmine/ChiliProject core application in order to
-   prevent a 'Double render' error on the WikiController. A pull request
-   [has been submitted](https://github.com/chiliproject/chiliproject/pull/62)
-   to the ChiliProject core team. Until then, you can manually apply the (small)
-   patch to your app if you like. The changeset can be found
-   [here](https://github.com/tomkersten/chiliproject/commit/b4e345dca9d72d8af9e8326c7cd8642e550be379).
+1. Two patches to consider adding to your Redmine/ChiliProject core application:
+   1. (REQUIRED) In order to prevent a 'Double render' error on the
+      WikiController. A pull request [has been submitted](https://github.com/chiliproject/chiliproject/pull/62)
+      to the ChiliProject core team. Until then, you can manually apply the
+      (small) patch to your app if you like. The changeset can be found
+      [here](https://github.com/tomkersten/chiliproject/commit/b4e345dca9d72d8af9e8326c7cd8642e550be379).
+   1. (Optional) To get a "PDF" link on the bottom of your project wiki pages,
+      you need to apply a (one-line) diff to your ChiliProject codebase. You can
+      find the diff [here](http://bit.ly/wiki_view_format_link_hooks). There is
+      a "Feature request" issue set up with a patch/pull request for the
+      implementation so it may be in the core soon. You can follow along with
+      the issue status [here](https://www.chiliproject.org/issues/488).
 
 ## FEATURES:
 
