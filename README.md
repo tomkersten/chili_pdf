@@ -17,10 +17,10 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
    but, it's something you should be aware of.
 1. Two patches to consider adding to your Redmine/ChiliProject core application:
    1. (REQUIRED) In order to prevent a 'Double render' error on the
-      WikiController. A pull request [has been submitted](https://github.com/chiliproject/chiliproject/pull/62)
+      WikiController. A pull request [has been submitted](http://bit.ly/jMrtYb)
       to the ChiliProject core team. Until then, you can manually apply the
       (small) patch to your app if you like. The changeset can be found
-      [here](https://github.com/tomkersten/chiliproject/commit/b4e345dca9d72d8af9e8326c7cd8642e550be379).
+      [here](http://bit.ly/jAPnuy).
    1. (Optional) To get a "PDF" link on the bottom of your project wiki pages,
       you need to apply a (one-line) diff to your ChiliProject codebase. You can
       find the diff [here](http://bit.ly/wiki_view_format_link_hooks). There is
@@ -38,6 +38,8 @@ ChiliProject (/Redmine) plugin which implements/enhances PDF-export functionalit
    own CSS and/or JavaScript on the plugin configuration page.
 1. Custom logo support. You can specify the URL of an image to place in the
    top-right corner of the first page of all exported PDFs.
+1. Adds a "PDF" link to the "Also available in" list of links at the bottom of
+   all wiki pages ([merged, but not released yet](http://bit.ly/jdcko9)).
 
 ## SCREENSHOTS:
 
