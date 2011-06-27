@@ -1,4 +1,4 @@
-=== NEXT
+=== 0.4.4 / 2011-06-27
 
 * Minor enhancements:
 
