@@ -54,3 +54,17 @@ pre {
   padding:10px; background:#DDD;
   margin:5px 0;
 }
+
+table {
+  border:1px solid #999;
+  border-collapse:collapse;
+}
+table th,
+table td {
+  padding:5px;
+  vertical-align:top;
+  border:1px solid #999;
+}
+table th {
+  font-weight:bold;
+}

@@ -5,5 +5,5 @@ require 'chili_pdf/string_token'
 require 'chili_pdf/tag_mangler'
 
 module ChiliPDF
-  VERSION = '0.4.3'
+  VERSION = '0.4.4'
 end

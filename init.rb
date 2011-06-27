@@ -20,4 +20,6 @@ Dispatcher.to_prepare :chili_pdf do
   require_dependency 'principal'
   require_dependency 'user'
   User.send(:include, UserPatch) unless User.included_modules.include? UserPatch
+
+  require_dependency 'wiki_format_hook_listener'
 end

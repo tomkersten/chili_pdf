@@ -9,13 +9,7 @@ class TagMangler
   end
 
   def to_absolute_url
-     if relative_url?
-       "#{base_url}#{relative_url}"
-     elsif anchor_tag
-       "#{@request_like.url}#{anchor_tag}"
-     else
-       @src_attribute
-     end
+    relative_url? ? "#{base_url}#{relative_url}" : @src_attribute
   end
 
   private
@@ -29,14 +23,6 @@ class TagMangler
       elsif requesting_attachment? && !attachment.blank?
         attachment.diskfile
       end
-    end
-
-    def anchor_tag
-      @src_attribute[%r!^(#.*)!]
-    end
-
-    def anchor_tag?
-      !anchor_tag.blank
     end
 
     def relative_url

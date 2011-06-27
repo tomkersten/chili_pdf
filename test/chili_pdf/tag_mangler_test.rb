@@ -142,24 +142,5 @@ class TokenManagerTest < Test::Unit::TestCase
         assert_equal @absolute_url, @mangler.to_absolute_url
       end
     end
-
-    context "when the content passed in has an anchor to another location in the current page" do
-      setup do
-        @base_url = "http://example.com"
-        @current_page = "/current_page"
-        @absolute_url = "#{@base_url}#{@current_page}"
-
-        mock_request = 'Mocked Request'
-        mock_request.stubs(:request_uri).returns(@current_page)
-        mock_request.stubs(:url).returns(@absolute_url)
-
-        @requested_asset = "#HeadingOnPage"
-        @mangler = make_mangler_with(@requested_asset, mock_request)
-      end
-
-      should "should return an absolute URL to the original page" do
-        assert_equal "#{@absolute_url}#{@requested_asset}", @mangler.to_absolute_url
-      end
-    end
   end
 end

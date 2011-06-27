@@ -32,6 +32,7 @@ lib/tasks/chili_pdf_tasks.rb
 lib/tasks/contributor_tasks.rb
 lib/tasks/test_lib_dir.rake
 lib/user_patch.rb
+lib/wiki_format_hook_listener.rb
 rails/init.rb
 test/chili_pdf/config_test.rb
 test/chili_pdf/formatter_test.rb

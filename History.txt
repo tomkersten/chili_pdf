@@ -1,3 +1,17 @@
+=== 0.4.4 / 2011-06-27
+
+* Minor enhancements:
+
+  * Removed #-based link -> absolute URLs conversions, as it
+    was not necessary (wkhtmltopdf handles those links correctly as link
+    to another location in the generated PDF).
+  * Added hook listener so a "PDF" link is added to the bottom of project
+    wiki pages. Requires a 1-line patch outlined/proposed
+    "here":https://www.chiliproject.org/issues/488 to work. You can apply
+    it yourself manually if you like until the patch is (hopefully)
+    accepted.
+  * Added some base styles for HTML tables
+
 === 0.4.3 / 2011-06-20
 
 * Bugfix:
