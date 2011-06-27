@@ -10,6 +10,7 @@
     "here":https://www.chiliproject.org/issues/488 to work. You can apply
     it yourself manually if you like until the patch is (hopefully)
     accepted.
+  * Added some base styles for HTML tables
 
 === 0.4.3 / 2011-06-20
 
